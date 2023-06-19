@@ -1,62 +1,54 @@
-// Arrays
-const numbers = [1, 2, 3, 4, 5];
-const fruits = ["apple", "banana", "orange"];
+// Arithmetic Operators
+let num1 = 10;
+let num2 = 5;
 
-// Accessing Array Elements
-console.log(numbers[0]); // Output: 1
-console.log(fruits[1]); // Output: banana
+let addition = num1 + num2;
+console.log(addition); // Output: 15
 
-// Modifying Array Elements
-numbers[2] = 10;
-console.log(numbers); // Output: [1, 2, 10, 4, 5]
+let subtraction = num1 - num2;
+console.log(subtraction); // Output: 5
 
-// Array Length
-console.log(fruits.length); // Output: 3
+let multiplication = num1 * num2;
+console.log(multiplication); // Output: 50
 
-// Adding and Removing Elements
-fruits.push("grape");
-console.log(fruits); // Output: ["apple", "banana", "orange", "grape"]
+let division = num1 / num2;
+console.log(division); // Output: 2
 
-fruits.pop();
-console.log(fruits); // Output: ["apple", "banana", "orange"]
+let remainder = num1 % num2;
+console.log(remainder); // Output: 0
 
-// Iterating over Array Elements
-numbers.forEach((num) => {
-  console.log(num);
-});
+// Assignment Operators
+let x = 10;
+x += 5;
+console.log(x); // Output: 15
 
-// Creating a new Array with map()
-const doubledNumbers = numbers.map((num) => num * 2);
-console.log(doubledNumbers); // Output: [2, 4, 20, 8, 10]
+let y = 20;
+y -= 3;
+console.log(y); // Output: 17
 
-// Filtering Array Elements with filter()
-const filteredNumbers = numbers.filter((num) => num > 3);
-console.log(filteredNumbers); // Output: [4, 5]
+let z = 5;
+z *= 2;
+console.log(z); // Output: 10
 
-// Checking if Array Elements satisfy a condition with every()
-const allPositive = numbers.every((num) => num > 0);
-console.log(allPositive); // Output: true
+let w = 12;
+w /= 4;
+console.log(w); // Output: 3
 
-// Checking if at least one Array Element satisfies a condition with some()
-const hasNegative = numbers.some((num) => num < 0);
-console.log(hasNegative); // Output: false
+// Comparison Operators
+let a = 5;
+let b = 10;
 
-// Finding the first Array Element that satisfies a condition with find()
-const firstEven = numbers.find((num) => num % 2 === 0);
-console.log(firstEven); // Output: 2
+console.log(a === b); // Output: false
+console.log(a !== b); // Output: true
+console.log(a > b); // Output: false
+console.log(a < b); // Output: true
+console.log(a >= b); // Output: false
+console.log(a <= b); // Output: true
 
-// Finding the index of the first Array Element that satisfies a condition with findIndex()
-const firstEvenIndex = numbers.findIndex((num) => num % 2 === 0);
-console.log(firstEvenIndex); // Output: 1
+// Logical Operators
+let p = true;
+let q = false;
 
-// Creating a new Array with elements that pass a test using filter() and map()
-const filteredDoubled = numbers.filter((num) => num > 2).map((num) => num * 2);
-console.log(filteredDoubled); // Output: [20, 8, 10]
-
-// Reducing an Array to a single value with reduce()
-const sum = numbers.reduce((total, num) => total + num, 0);
-console.log(sum); // Output: 15
-
-// Checking if a value includes inside the array
-console.log(numbers.includes(1)); // Output: true
-console.log(numbers.includes(6)); // Output: false
+console.log(p && q); // Output: false
+console.log(p || q); // Output: true
+console.log(!p); // Output: false
