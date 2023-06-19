@@ -1,52 +1,62 @@
-// Numbers
-const age = 25;
-const price = 9.99;
-console.log(age); // Output: 25
-console.log(price); // Output: 9.99
+// Arrays
+const numbers = [1, 2, 3, 4, 5];
+const fruits = ["apple", "banana", "orange"];
 
-// Strings
-const name = "John Doe";
-const message = "Hello, world!";
-console.log(name); // Output: John Doe
-console.log(message); // Output: Hello, world!
+// Accessing Array Elements
+console.log(numbers[0]); // Output: 1
+console.log(fruits[1]); // Output: banana
 
-// Booleans
-const isActive = true;
-const isLoggedIn = false;
-console.log(isActive); // Output: true
-console.log(isLoggedIn); // Output: false
+// Modifying Array Elements
+numbers[2] = 10;
+console.log(numbers); // Output: [1, 2, 10, 4, 5]
 
-// Null and Undefined
-let variable1 = null;
-let variable2; // undefined
-console.log(variable1); // Output: null
-console.log(variable2); // Output: undefined
+// Array Length
+console.log(fruits.length); // Output: 3
 
-// Objects
-const person = {
-  name: "John",
-  age: 30,
-  city: "New York"
-};
-console.log(person); // Output: { name: "John", age: 30, city: "New York" }
+// Adding and Removing Elements
+fruits.push("grape");
+console.log(fruits); // Output: ["apple", "banana", "orange", "grape"]
 
-// Symbols
-const id = Symbol("unique identifier");
-console.log(id); // Output: Symbol(unique identifier)
+fruits.pop();
+console.log(fruits); // Output: ["apple", "banana", "orange"]
 
-// Unknown
-let value;
-value = 5; // value is now a number
-console.log(value); // Output: 5
-value = "Hello"; // value is now a string
-console.log(value); // Output: Hello
-value = true; // value is now a boolean
-console.log(value); // Output: true
-value = null; // value is now null
-console.log(value); // Output: null
-value = { name: "John" }; // value is now an object
-console.log(value); // Output: { name: "John" }
-value = Symbol("unique identifier"); // value is now a symbol
-console.log(value); // Output: Symbol(unique identifier)
-value = undefined; // value is now undefined
-console.log(value); // Output: undefined
+// Iterating over Array Elements
+numbers.forEach((num) => {
+  console.log(num);
+});
+
+// Creating a new Array with map()
+const doubledNumbers = numbers.map((num) => num * 2);
+console.log(doubledNumbers); // Output: [2, 4, 20, 8, 10]
+
+// Filtering Array Elements with filter()
+const filteredNumbers = numbers.filter((num) => num > 3);
+console.log(filteredNumbers); // Output: [4, 5]
+
+// Checking if Array Elements satisfy a condition with every()
+const allPositive = numbers.every((num) => num > 0);
+console.log(allPositive); // Output: true
+
+// Checking if at least one Array Element satisfies a condition with some()
+const hasNegative = numbers.some((num) => num < 0);
+console.log(hasNegative); // Output: false
+
+// Finding the first Array Element that satisfies a condition with find()
+const firstEven = numbers.find((num) => num % 2 === 0);
+console.log(firstEven); // Output: 2
+
+// Finding the index of the first Array Element that satisfies a condition with findIndex()
+const firstEvenIndex = numbers.findIndex((num) => num % 2 === 0);
+console.log(firstEvenIndex); // Output: 1
+
+// Creating a new Array with elements that pass a test using filter() and map()
+const filteredDoubled = numbers.filter((num) => num > 2).map((num) => num * 2);
+console.log(filteredDoubled); // Output: [20, 8, 10]
+
+// Reducing an Array to a single value with reduce()
+const sum = numbers.reduce((total, num) => total + num, 0);
+console.log(sum); // Output: 15
+
+// Checking if a value includes inside the array
+console.log(numbers.includes(1)); // Output: true
+console.log(numbers.includes(6)); // Output: false
