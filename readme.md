@@ -1,165 +1,82 @@
-# Arrays and Array Functions
+# Basic Operators
 
-Arrays are used to store collections of data in JavaScript. Here are some common operations performed on arrays, along with examples of various array functions:
+Operators in JavaScript are used to perform various operations on values or variables. Here are some common types of operators:
 
-## Arrays
+## Arithmetic Operators
 
-Arrays are created using square brackets `[]` and can hold elements of any type.
+Arithmetic operators are used to perform mathematical calculations.
 
 Example:
 
 ```javascript
-const numbers = [1, 2, 3, 4, 5];
-const fruits = ["apple", "banana", "orange"];
+let num1 = 10;
+let num2 = 5;
+
+let addition = num1 + num2;
+console.log(addition); // Output: 15
+
+let subtraction = num1 - num2;
+console.log(subtraction); // Output: 5
+
+let multiplication = num1 * num2;
+console.log(multiplication); // Output: 50
+
+let division = num1 / num2;
+console.log(division); // Output: 2
+
+let remainder = num1 % num2;
+console.log(remainder); // Output: 0
 ```
 
-## Accessing Array Elements
+## Assignment Operators
 
-Array elements can be accessed using square bracket notation and the index of the element (zero-based index).
+Assignment operators are used to assign values to variables.
 
 Example:
 
 ```javascript
-console.log(numbers[0]); // Output: 1
-console.log(fruits[1]); // Output: banana
+let x = 10;
+x += 5;
+console.log(x); // Output: 15
+
+let y = 20;
+y -= 3;
+console.log(y); // Output: 17
+
+let z = 5;
+z *= 2;
+console.log(z); // Output: 10
+
+let w = 12;
+w /= 4;
+console.log(w); // Output: 3
 ```
 
-## Modifying Array Elements
+## Comparison Operators
 
-Array elements can be modified by assigning a new value to a specific index.
+Comparison operators are used to compare values and return a boolean result.
 
 Example:
 
 ```javascript
-numbers[2] = 10;
-console.log(numbers); // Output: [1, 2, 10, 4, 5]
+let a = 5;
+let b = 10;
+
+console.log(a === b); // Output: false
+console.log(a !== b); // Output: true
+console.log(a > b); // Output: false
+console.log(a < b); // Output: true
+console.log(a >= b); // Output: false
+console.log(a <= b); // Output: true
 ```
 
-## Array Length
+## Logical Operators
 
-The length property of an array returns the number of elements in the array.
-
-Example:
-
-```javascript
-console.log(fruits.length); // Output: 3
-```
-
-## Adding and Removing Elements
-
-New elements can be added to an array using the push() method, and elements can be removed using the pop() method.
+Logical operators are used to combine or negate boolean values.
 
 Example:
 
 ```javascript
-fruits.push("grape");
-console.log(fruits); // Output: ["apple", "banana", "orange", "grape"]
-
-fruits.pop();
-console.log(fruits); // Output: ["apple", "banana", "orange"]
-```
-
-## Array Functions
-
-JavaScript provides several built-in array functions to perform operations on arrays. Here are some commonly used ones:
-
-## forEach()
-
-The forEach() function executes a callback function for each element in the array.
-
-Example:
-
-```javascript
-numbers.forEach((num) => {
-  console.log(num);
-});
-```
-
-## map()
-
-The map() function creates a new array by applying a callback function to each element of the original array.
-
-Example:
-
-```javascript
-const doubledNumbers = numbers.map((num) => num * 2);
-console.log(doubledNumbers); // Output: [2, 4, 20, 8, 10]
-```
-
-## filter()
-
-The filter() function creates a new array with elements that satisfy a certain condition specified in a callback function.
-
-Example:
-
-```javascript
-const filteredNumbers = numbers.filter((num) => num > 3);
-console.log(filteredNumbers); // Output: [4, 5]
-```
-
-## every()
-
-The every() function checks if all elements in the array satisfy a specified condition.
-
-Example:
-
-```javascript
-const allPositive = numbers.every((num) => num > 0);
-console.log(allPositive); // Output: true
-```
-
-## some()
-
-The some() function checks if at least one element in the array satisfies a specified condition.
-
-Example:
-
-```javascript
-const hasNegative = numbers.some((num) => num < 0);
-console.log(hasNegative); // Output: false
-```
-
-## find()
-
-The find() function returns the first element in the array that satisfies a specified condition.
-
-Example:
-
-```javascript
-const firstEven = numbers.find((num) => num % 2 === 0);
-console.log(firstEven); // Output: 2
-```
-
-## findIndex()
-
-The findIndex() function returns the index of the first element in the array that satisfies a specified condition.
-
-Example:
-
-```javascript
-const firstEvenIndex = numbers.findIndex((num) => num % 2 === 0);
-console.log(firstEvenIndex); // Output: 1
-```
-
-## reduce()
-
-The reduce() function applies a callback function to reduce an array to a single value by iteratively combining elements.
-
-Example:
-
-```javascript
-const sum = numbers.reduce((total, num) => total + num, 0);
-console.log(sum); // Output: 15
-```
-
-## includes()
-
-The includes() function checks if an array includes a specific element and returns true or false accordingly.
-
-Example:
-
-```javascript
-const numbers = [1, 2, 3, 4, 5];
-console.log(numbers.includes(1)); // Output: true
-console.log(numbers.includes(6)); // Output: false
+let p = true;
+let q = false;
 ```
