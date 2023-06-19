@@ -1,44 +1,87 @@
-# Variables (var, let, const)
+# JavaScript Data Types
 
-In JavaScript, variables are used to store and manipulate data. There are three ways to declare variables: `var`, `let`, and `const`.
+JavaScript has several built-in data types to represent different kinds of values. Here are the commonly used data types:
 
-## var
+## Numbers
 
-The `var` keyword was traditionally used to declare variables in JavaScript. Variables declared with `var` have function scope or global scope, depending on where they are declared. They can be reassigned and redeclared within their scope.
+In JavaScript, numbers represent numeric values. They can be integers or floating-point numbers.
 
-```javascript
-var name = "John";
-name = "Jane"; // Variable can be reassigned
-var age = 25;
-var age = 30; // Variable can be redeclared within the same scope
-```
-
-## let
-
-The let keyword was introduced in ECMAScript 6 (ES6) and provides block scope for variables. Variables declared with let are limited to the block in which they are defined (e.g., within curly braces {}). They can be reassigned but cannot be redeclared within the same scope.
+Example:
 
 ```javascript
-let name = "John";
-name = "Jane"; // Variable can be reassigned
-let age = 25;
-let age = 30; // SyntaxError: Identifier 'age' has already been declared
-```
-
-## const
-
-The const keyword also came with ES6 and is used to declare variables that have a constant (unchanging) value. const variables are block-scoped and cannot be reassigned or redeclared within the same scope. However, for objects and arrays assigned to const, their internal properties can still be modified.
-
-```javascript
-const name = "John";
-name = "Jane"; // TypeError: Assignment to a constant variable
 const age = 25;
-const age = 30; // SyntaxError: Identifier 'age' has already been declared
-
-const numbers = [1, 2, 3];
-numbers.push(4); // Valid, the internal array can be modified
-numbers = [1, 2, 3, 4]; // TypeError: Assignment to a constant variable
+const price = 9.99;
 ```
 
-It's generally recommended to use let or const instead of var due to their more predictable behavior and block scoping.
+## Strings
 
-Keep in mind that choosing between let and const depends on whether you need the variable to be reassigned. If you know the variable won't be reassigned, using const provides immutability and can help prevent accidental modifications.
+Strings represent textual data enclosed within single quotes ('') or double quotes ("").
+
+Example:
+
+```javascript
+const name = "John Doe";
+const message = "Hello, world!";
+```
+
+## Booleans
+
+Booleans represent either true or false, indicating logical values.
+
+Example:
+
+```javascript
+const isActive = true;
+const isLoggedIn = false;
+```
+
+Null and Undefined
+null and undefined represent the absence of a value.
+
+Example:
+
+```javascript
+let variable1 = null;
+let variable2; // undefined
+```
+
+## Objects
+
+Objects are complex data types that store collections of key-value pairs. They are denoted by curly braces {}.
+
+Example:
+
+```javascript
+const person = {
+  name: "John",
+  age: 30,
+  city: "New York",
+};
+```
+
+## Symbols
+
+Symbols are unique and immutable data types used as unique identifiers for object properties.
+
+Example:
+
+```
+const id = Symbol("unique identifier");
+```
+
+## Unknown
+
+unknown is a type introduced in TypeScript and supported in modern JavaScript. It represents values whose types are not known during development.
+
+Example:
+
+```javascript
+let value;
+value = 5; // value is now a number
+value = "Hello"; // value is now a string
+value = true; // value is now a boolean
+value = null; // value is now null
+value = { name: "John" }; // value is now an object
+value = Symbol("unique identifier"); // value is now a symbol
+value = undefined; // value is now undefined
+```
