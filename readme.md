@@ -22,9 +22,11 @@ The HTML code defines a simple web page structure with the following elements:
 </html>
 ```
 
-> The <h1> element with id="title" represents a heading.
-> The <p> element with class="content" represents a paragraph.
-> The <button> element with id="myButton" represents a button.
+```
+The <h1> element with id="title" represents a heading.
+The <p> element with class="content" represents a paragraph.
+The <button> element with id="myButton" represents a button.
+```
 
 ## JavaScript Code
 
