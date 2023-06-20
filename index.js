@@ -1,26 +1,30 @@
-// Try/Catch
+// Creating and Removing Elements
 
-try {
-  // Code that might throw an error
-  const result = 10 / 0; // Division by zero
-  console.log(result); // This line won't be executed
-} catch (error) {
-  // Code to handle the error
-  console.error("An error occurred:", error);
+// Creating a new element
+const newElement = document.createElement("div");
+newElement.textContent = "New element";
+newElement.className = "box";
+
+// Appending the new element to an existing element
+const container = document.getElementById("container");
+container.appendChild(newElement);
+
+// Removing an element
+const elementToRemove = document.getElementById("element-to-remove");
+if (elementToRemove) {
+  elementToRemove.remove();
 }
 
-// Throwing Errors
+// Traversing the DOM
 
-function divide(a, b) {
-  if (b === 0) {
-    throw new Error("Cannot divide by zero");
-  }
-  return a / b;
-}
+// Accessing parent element
+const parentElement = container.parentNode;
 
-try {
-  const result = divide(10, 0); // Throws an error
-  console.log(result); // This line won't be executed
-} catch (error) {
-  console.error("An error occurred:", error);
-}
+// Accessing sibling elements
+const previousSibling = container.previousElementSibling;
+const nextSibling = container.nextElementSibling;
+
+// Accessing child elements
+const children = container.children;
+const firstChild = container.firstElementChild;
+const lastChild = container.lastElementChild;
