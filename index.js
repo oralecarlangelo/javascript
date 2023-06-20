@@ -1,30 +1,44 @@
-// Example 1: Callback Function
-function greet(name, callback) {
-  console.log(`Hello, ${name}!`);
-  callback();
-}
-
-function sayGoodbye() {
-  console.log("Goodbye!");
-}
-
-greet("John", sayGoodbye);
-// Output:
-// Hello, John!
-// Goodbye!
-
-// Example 2: Callback with Asynchronous Operation
-function fetchData(callback) {
+// Example 1: Creating a Promise
+const promise = new Promise((resolve, reject) => {
+  // Simulating an asynchronous operation
   setTimeout(() => {
-    const data = "This is the fetched data.";
-    callback(data);
+    const success = true;
+
+    if (success) {
+      resolve("Operation completed successfully.");
+    } else {
+      reject("Operation failed.");
+    }
   }, 2000);
-}
+});
 
-function processData(data) {
-  console.log(`Processing data: ${data}`);
-}
+promise
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+// Output (after 2 seconds): Operation completed successfully.
 
-fetchData(processData);
-// Output (after 2 seconds):
-// Processing data: This is the fetched data.
+// Example 2: Chaining Promises
+const multiply = (num) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const result = num * 2;
+      resolve(result);
+    }, 1000);
+  });
+};
+
+multiply(3)
+  .then((result) => {
+    console.log(result); // Output: 6
+    return multiply(result);
+  })
+  .then((result) => {
+    console.log(result); // Output: 12
+  })
+  .catch((error) => {
+    console.error(error);
+  });
