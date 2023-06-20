@@ -1,69 +1,48 @@
-# Functional Programming
+# JavaScript Foundation Repository
 
-## Pure Functions
+## Error Handling
 
-A pure function is a function that always produces the same output for the same input and does not have any side effects. It does not modify any external state or rely on external dependencies.
+Error handling is an important aspect of building robust JavaScript applications. It allows for the detection and handling of errors to prevent program crashes and provide meaningful feedback to users.
 
-### Example
+### Try/Catch
+
+The `try/catch` statement is used to catch and handle errors that occur within a specific block of code. The `try` block contains the code that might throw an error, and the `catch` block is executed if an error occurs.
+
+Example:
 
 ```javascript
-function add(a, b) {
-  return a + b;
+try {
+  // Code that might throw an error
+  const result = 10 / 0; // Division by zero
+  console.log(result); // This line won't be executed
+} catch (error) {
+  // Code to handle the error
+  console.error("An error occurred:", error);
 }
-
-const result = add(2, 3);
-console.log(result); // Output: 5
 ```
 
-In the above example, the add function is a pure function. It takes two inputs and always returns the same output for the same inputs. It does not modify any external state or rely on external variables.
+In the above example, the try block attempts to divide 10 by 0, which would result in an error. The catch block is executed, and the error object is caught and logged to the console.
 
-## Higher-Order Functions
+## Throwing Errors
 
-Higher-order functions are functions that can take other functions as arguments or return functions as results. They allow for the composition and abstraction of behaviors.
+Throwing errors allows you to create custom error conditions and handle them appropriately. You can throw errors using the throw statement, along with an error object.
 
-Example
+Example:
 
 ```javascript
-function multiplyByTwo(number) {
-  return number * 2;
-}
-
-function transformArray(array, transformation) {
-  const transformedArray = [];
-  for (let i = 0; i < array.length; i++) {
-    transformedArray.push(transformation(array[i]));
+function divide(a, b) {
+  if (b === 0) {
+    throw new Error("Cannot divide by zero");
   }
-  return transformedArray;
+  return a / b;
 }
 
-const numbers = [1, 2, 3, 4, 5];
-const doubledNumbers = transformArray(numbers, multiplyByTwo);
-console.log(doubledNumbers); // Output: [2, 4, 6, 8, 10]
+try {
+  const result = divide(10, 0); // Throws an error
+  console.log(result); // This line won't be executed
+} catch (error) {
+  console.error("An error occurred:", error);
+}
 ```
 
-In the above example, the transformArray function is a higher-order function. It takes an array and a transformation function as arguments. It applies the transformation function to each element of the array and returns a new array with the transformed values.
-
-## Functional Composition
-
-Functional composition is the process of combining multiple functions to create new functions. It allows for the creation of complex behaviors by chaining together simpler functions.
-
-Example
-
-```javascript
-function add(a, b) {
-  return a + b;
-}
-
-function multiplyByTwo(number) {
-  return number * 2;
-}
-
-function subtractOne(number) {
-  return number - 1;
-}
-
-const result = subtractOne(multiplyByTwo(add(2, 3)));
-console.log(result); // Output: 9
-```
-
-In the above example, the result is obtained by composing multiple functions together. The add function adds 2 and 3, the multiplyByTwo function doubles the result, and the subtractOne function subtracts 1 from the multiplied value.
+In the above example, the divide function throws an error if the divisor is zero. The error is caught in the catch block, and the error message is logged to the console.
