@@ -1,74 +1,69 @@
-# Inheritance
+# Functional Programming
 
-Inheritance is a key concept in object-oriented programming that allows objects to acquire properties and methods from other objects. It enables code reuse and promotes the creation of more organized and maintainable code.
+## Pure Functions
 
-## Example 1: Prototypal Inheritance
+A pure function is a function that always produces the same output for the same input and does not have any side effects. It does not modify any external state or rely on external dependencies.
 
-In JavaScript, prototypal inheritance is achieved by creating a prototype chain between objects. Constructors and prototypes are used to establish this chain.
-
-Example:
+### Example
 
 ```javascript
-function Animal(name) {
-  this.name = name;
+function add(a, b) {
+  return a + b;
 }
 
-Animal.prototype.makeSound = function () {
-  console.log("Making a sound...");
-};
-
-function Dog(name, breed) {
-  Animal.call(this, name);
-  this.breed = breed;
-}
-
-Dog.prototype = Object.create(Animal.prototype);
-Dog.prototype.constructor = Dog;
-
-Dog.prototype.bark = function () {
-  console.log("Barking...");
-};
-
-const dog1 = new Dog("Max", "Labrador");
-dog1.makeSound(); // Output: Making a sound...
-dog1.bark(); // Output: Barking...
+const result = add(2, 3);
+console.log(result); // Output: 5
 ```
 
-In the above example, the Animal constructor defines the name property and the makeSound method. The Dog constructor inherits from Animal using Object.create() to set up the prototype chain. The bark method is added to the Dog.prototype, allowing instances of Dog to access and use that method.
+In the above example, the add function is a pure function. It takes two inputs and always returns the same output for the same inputs. It does not modify any external state or rely on external variables.
 
-Example 2: Class Inheritance
-ES6 introduced the class syntax, providing a more concise and intuitive way to achieve inheritance.
+## Higher-Order Functions
 
-Example:
+Higher-order functions are functions that can take other functions as arguments or return functions as results. They allow for the composition and abstraction of behaviors.
+
+Example
 
 ```javascript
-class Vehicle {
-  constructor(make, model) {
-    this.make = make;
-    this.model = model;
-  }
-
-  startEngine() {
-    console.log("Engine started.");
-  }
+function multiplyByTwo(number) {
+  return number * 2;
 }
 
-class Car extends Vehicle {
-  constructor(make, model, color) {
-    super(make, model);
-    this.color = color;
+function transformArray(array, transformation) {
+  const transformedArray = [];
+  for (let i = 0; i < array.length; i++) {
+    transformedArray.push(transformation(array[i]));
   }
-
-  drive() {
-    console.log("Driving...");
-  }
+  return transformedArray;
 }
 
-const car1 = new Car("Toyota", "Camry", "Blue");
-car1.startEngine(); // Output: Engine started.
-car1.drive(); // Output: Driving...
+const numbers = [1, 2, 3, 4, 5];
+const doubledNumbers = transformArray(numbers, multiplyByTwo);
+console.log(doubledNumbers); // Output: [2, 4, 6, 8, 10]
 ```
 
-In the above example, the Car class extends the Vehicle class using the extends keyword. The super keyword is used in the Car constructor to call the parent class constructor. This establishes the inheritance relationship, allowing Car instances to access the methods defined in Vehicle class.
+In the above example, the transformArray function is a higher-order function. It takes an array and a transformation function as arguments. It applies the transformation function to each element of the array and returns a new array with the transformed values.
 
-Inheritance provides a powerful mechanism for creating hierarchies of objects and promoting code reuse. It allows for the extension and specialization of existing objects, providing flexibility and maintainability.
+## Functional Composition
+
+Functional composition is the process of combining multiple functions to create new functions. It allows for the creation of complex behaviors by chaining together simpler functions.
+
+Example
+
+```javascript
+function add(a, b) {
+  return a + b;
+}
+
+function multiplyByTwo(number) {
+  return number * 2;
+}
+
+function subtractOne(number) {
+  return number - 1;
+}
+
+const result = subtractOne(multiplyByTwo(add(2, 3)));
+console.log(result); // Output: 9
+```
+
+In the above example, the result is obtained by composing multiple functions together. The add function adds 2 and 3, the multiplyByTwo function doubles the result, and the subtractOne function subtracts 1 from the multiplied value.
