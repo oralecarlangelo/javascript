@@ -1,35 +1,31 @@
-// Example 1: Hoisting
-console.log(message); // Output: undefined
-var message = "Hello, world!";
-
-// Example 2: Function Scope
-function greet() {
-  var name = "John";
-  console.log("Hello, " + name);
+// Example 1: Constructors and Instances
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
 }
 
-greet(); // Output: Hello, John
-console.log(name); // Output: ReferenceError: name is not defined
+const person1 = new Person("John Doe", 30);
+console.log(person1.name); // Output: John Doe
+console.log(person1.age); // Output: 30
 
-// Example 3: Block Scope
-function count() {
-  for (var i = 1; i <= 5; i++) {
-    console.log(i);
-  }
-  console.log(i); // Output: 6
-}
+const person2 = new Person("Jane Smith", 25);
+console.log(person2.name); // Output: Jane Smith
+console.log(person2.age); // Output: 25
 
-count();
-
-// Example 4: Lexical Scope
-function outer() {
-  var outerVariable = "I'm from outer function";
-
-  function inner() {
-    console.log(outerVariable);
+// Example 2: ES6 Classes
+class Car {
+  constructor(brand, model) {
+    this.brand = brand;
+    this.model = model;
   }
 
-  inner(); // Output: I'm from outer function
+  getDetails() {
+    return `${this.brand} ${this.model}`;
+  }
 }
 
-outer();
+const car1 = new Car("Toyota", "Camry");
+console.log(car1.getDetails()); // Output: Toyota Camry
+
+const car2 = new Car("Honda", "Accord");
+console.log(car2.getDetails()); // Output: Honda Accord
