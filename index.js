@@ -1,38 +1,57 @@
-// Arrays
-const numbers = [1, 2, 3, 4, 5];
+// JSON Object
+const person = {
+  name: "John",
+  age: 30,
+  city: "New York"
+};
 
-// Creating a new Array with map()
-const doubledNumbers = numbers.map((num) => num * 2);
-console.log(doubledNumbers); // Output: [2, 4, 20, 8, 10]
+// Convert Object to JSON
+const personJSON = JSON.stringify(person);
+console.log(personJSON); // Output: {"name":"John","age":30,"city":"New York"}
 
-// Filtering Array Elements with filter()
-const filteredNumbers = numbers.filter((num) => num > 3);
-console.log(filteredNumbers); // Output: [4, 5]
+// Convert JSON to Object
+const personObject = JSON.parse(personJSON);
+console.log(personObject); // Output: { name: "John", age: 30, city: "New York" }
 
-// Checking if Array Elements satisfy a condition with every()
-const allPositive = numbers.every((num) => num > 0);
-console.log(allPositive); // Output: true
 
-// Checking if at least one Array Element satisfies a condition with some()
-const hasNegative = numbers.some((num) => num < 0);
-console.log(hasNegative); // Output: false
+// Array of Objects
+const employees = [
+  {
+    id: 1,
+    name: "John Doe",
+    position: "Developer",
+    salary: 50000
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    position: "Designer",
+    salary: 60000
+  },
+  {
+    id: 3,
+    name: "Bob Johnson",
+    position: "Manager",
+    salary: 80000
+  }
+];
 
-// Finding the first Array Element that satisfies a condition with find()
-const firstEven = numbers.find((num) => num % 2 === 0);
-console.log(firstEven); // Output: 2
+// Convert Array of Objects to JSON
+const employeesJSON = JSON.stringify(employees);
+console.log(employeesJSON);
+// Output:
+// [
+//   {"id":1,"name":"John Doe","position":"Developer","salary":50000},
+//   {"id":2,"name":"Jane Smith","position":"Designer","salary":60000},
+//   {"id":3,"name":"Bob Johnson","position":"Manager","salary":80000}
+// ]
 
-// Finding the index of the first Array Element that satisfies a condition with findIndex()
-const firstEvenIndex = numbers.findIndex((num) => num % 2 === 0);
-console.log(firstEvenIndex); // Output: 1
-
-// Creating a new Array with elements that pass a test using filter() and map()
-const filteredDoubled = numbers.filter((num) => num > 2).map((num) => num * 2);
-console.log(filteredDoubled); // Output: [20, 8, 10]
-
-// Reducing an Array to a single value with reduce()
-const sum = numbers.reduce((total, num) => total + num, 0);
-console.log(sum); // Output: 15
-
-// Checking if a value includes inside the array
-console.log(numbers.includes(1)); // Output: true
-console.log(numbers.includes(6)); // Output: false
+// Convert JSON to Array of Objects
+const employeesArray = JSON.parse(employeesJSON);
+console.log(employeesArray);
+// Output:
+// [
+//   { id: 1, name: 'John Doe', position: 'Developer', salary: 50000 },
+//   { id: 2, name: 'Jane Smith', position: 'Designer', salary: 60000 },
+//   { id: 3, name: 'Bob Johnson', position: 'Manager', salary: 80000 }
+// ]
