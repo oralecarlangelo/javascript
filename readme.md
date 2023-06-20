@@ -1,4 +1,4 @@
-# Arrays and Array Functions
+# Arrays
 
 Arrays are used to store collections of data in JavaScript. Here are some common operations performed on arrays, along with examples of various array functions:
 
