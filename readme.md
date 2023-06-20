@@ -1,49 +1,66 @@
-# Callbacks
+# Promises
 
-In JavaScript, a callback is a function that is passed as an argument to another function and is invoked after a certain operation or task is completed. Callbacks are commonly used for handling asynchronous operations and achieving better control flow.
+Promises are a powerful feature in JavaScript for handling asynchronous operations. They provide a way to write cleaner and more manageable code when dealing with operations that may take some time to complete.
 
-## Example 1: Callback Function
+## Example 1: Creating a Promise
 
-A callback function can be used to execute code after a specific task is completed.
-
-Example:
-
-```javascript
-function greet(name, callback) {
-  console.log(`Hello, ${name}!`);
-  callback();
-}
-
-function sayGoodbye() {
-  console.log("Goodbye!");
-}
-
-greet("John", sayGoodbye);
-```
-
-In the above example, the greet function takes a name parameter and a callback function. After greeting the person by name, the callback function sayGoodbye is invoked, resulting in the message "Goodbye!" being logged to the console.
-
-## Example 2: Callback with Asynchronous Operation
-
-Callbacks are commonly used in asynchronous operations, such as fetching data from an API or performing time-consuming tasks.
+A Promise represents the eventual completion or failure of an asynchronous operation. It can be in one of three states: `pending`, `fulfilled`, or `rejected`.
 
 Example:
 
 ```javascript
-function fetchData(callback) {
+const promise = new Promise((resolve, reject) => {
   setTimeout(() => {
-    const data = "This is the fetched data.";
-    callback(data);
+    const success = true;
+
+    if (success) {
+      resolve("Operation completed successfully.");
+    } else {
+      reject("Operation failed.");
+    }
   }, 2000);
-}
+});
 
-function processData(data) {
-  console.log(`Processing data: ${data}`);
-}
-
-fetchData(processData);
+promise
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 ```
 
-In the above example, the fetchData function simulates an asynchronous operation that takes 2 seconds to complete. After the data is fetched, the callback function processData is invoked with the fetched data as an argument, resulting in the message "Processing data: This is the fetched data." being logged to the console.
+In the above example, a Promise is created to simulate an asynchronous operation that takes 2 seconds to complete. The Promise will either resolve with a success message or reject with an error message based on the value of the success variable. The .then() method is used to handle the resolved state, and the .catch() method is used to handle the rejected state.
 
-Callbacks provide a flexible way to handle asynchronous operations, allowing you to control the flow of execution and perform actions after a specific task is finished.
+## Example 2: Chaining Promises
+
+Promises can be chained together to perform a sequence of asynchronous operations.
+
+Example:
+
+```javascript
+const multiply = (num) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const result = num * 2;
+      resolve(result);
+    }, 1000);
+  });
+};
+
+multiply(3)
+  .then((result) => {
+    console.log(result); // Output: 6
+    return multiply(result);
+  })
+  .then((result) => {
+    console.log(result); // Output: 12
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+```
+
+In the above example, the multiply function returns a Promise that resolves with the result of multiplying the given number by 2. The Promises are chained together using the .then() method, allowing the subsequent .then() to operate on the resolved value of the previous Promise.
+
+Promises provide a more elegant and readable way to handle asynchronous operations, making the code easier to understand and maintain.
