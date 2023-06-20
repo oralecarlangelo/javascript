@@ -1,82 +1,102 @@
-# Basic Operators
+# Control Structures
 
-Operators in JavaScript are used to perform various operations on values or variables. Here are some common types of operators:
+Control structures in JavaScript are used to control the flow of execution in a program. Here are some commonly used control structures:
 
-## Arithmetic Operators
+## If...Else
 
-Arithmetic operators are used to perform mathematical calculations.
+The `if...else` statement is used to execute a block of code based on a condition.
 
 Example:
 
 ```javascript
-let num1 = 10;
-let num2 = 5;
+let age = 18;
 
-let addition = num1 + num2;
-console.log(addition); // Output: 15
-
-let subtraction = num1 - num2;
-console.log(subtraction); // Output: 5
-
-let multiplication = num1 * num2;
-console.log(multiplication); // Output: 50
-
-let division = num1 / num2;
-console.log(division); // Output: 2
-
-let remainder = num1 % num2;
-console.log(remainder); // Output: 0
+if (age >= 18) {
+  console.log("You are eligible to vote.");
+} else {
+  console.log("You are not eligible to vote.");
+}
 ```
 
-## Assignment Operators
+## Else If
 
-Assignment operators are used to assign values to variables.
+The else if statement allows you to add additional conditions to be checked if the previous condition is not met.
 
 Example:
 
 ```javascript
-let x = 10;
-x += 5;
-console.log(x); // Output: 15
+let time = 12;
 
-let y = 20;
-y -= 3;
-console.log(y); // Output: 17
-
-let z = 5;
-z *= 2;
-console.log(z); // Output: 10
-
-let w = 12;
-w /= 4;
-console.log(w); // Output: 3
+if (time < 12) {
+  console.log("Good morning!");
+} else if (time < 18) {
+  console.log("Good afternoon!");
+} else {
+  console.log("Good evening!");
+}
 ```
 
-## Comparison Operators
+## Switch
 
-Comparison operators are used to compare values and return a boolean result.
+The switch statement allows you to perform different actions based on different conditions.
 
 Example:
 
 ```javascript
-let a = 5;
-let b = 10;
+let day = "Monday";
 
-console.log(a === b); // Output: false
-console.log(a !== b); // Output: true
-console.log(a > b); // Output: false
-console.log(a < b); // Output: true
-console.log(a >= b); // Output: false
-console.log(a <= b); // Output: true
+switch (day) {
+  case "Monday":
+    console.log("Today is Monday.");
+    break;
+  case "Tuesday":
+    console.log("Today is Tuesday.");
+    break;
+  case "Wednesday":
+    console.log("Today is Wednesday.");
+    break;
+  default:
+    console.log("Today is some other day.");
+}
 ```
 
-## Logical Operators
+## For Loop
 
-Logical operators are used to combine or negate boolean values.
+A for loop is used to repeat a block of code a certain number of times.
 
 Example:
 
 ```javascript
-let p = true;
-let q = false;
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+## While Loop
+
+A while loop is used to execute a block of code repeatedly as long as a specified condition is true.
+
+Example:
+
+```javascript
+let count = 0;
+
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+Do...While Loop
+A do...while loop is used to execute a block of code once, and then repeat the execution as long as a specified condition is true.
+
+Example:
+
+```javascript
+let i = 0;
+
+do {
+  console.log(i);
+  i++;
+} while (i < 5);
 ```
