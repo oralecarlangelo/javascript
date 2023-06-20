@@ -1,55 +1,74 @@
-# Prototypes
+# Inheritance
 
-Prototypes are an essential part of JavaScript's object-oriented programming model. They allow objects to inherit properties and methods from other objects. Prototypes provide a way to share common functionality across multiple objects efficiently.
+Inheritance is a key concept in object-oriented programming that allows objects to acquire properties and methods from other objects. It enables code reuse and promotes the creation of more organized and maintainable code.
 
-## Example 1: Prototypes with Constructors
+## Example 1: Prototypal Inheritance
 
-In JavaScript, every object has a prototype that acts as a blueprint for that object's properties and methods. Prototypes can be created using constructor functions.
+In JavaScript, prototypal inheritance is achieved by creating a prototype chain between objects. Constructors and prototypes are used to establish this chain.
 
 Example:
 
 ```javascript
-function Person(name, age) {
+function Animal(name) {
   this.name = name;
-  this.age = age;
 }
 
-Person.prototype.greet = function () {
-  console.log(`Hello, my name is ${this.name}`);
+Animal.prototype.makeSound = function () {
+  console.log("Making a sound...");
 };
 
-const person1 = new Person("John Doe", 30);
-person1.greet(); // Output: Hello, my name is John Doe
+function Dog(name, breed) {
+  Animal.call(this, name);
+  this.breed = breed;
+}
+
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+
+Dog.prototype.bark = function () {
+  console.log("Barking...");
+};
+
+const dog1 = new Dog("Max", "Labrador");
+dog1.makeSound(); // Output: Making a sound...
+dog1.bark(); // Output: Barking...
 ```
 
-In the above example, the Person constructor function defines the name and age properties for instances of Person. The greet method is added to the Person.prototype, which allows all instances of Person to access and use that method.
+In the above example, the Animal constructor defines the name property and the makeSound method. The Dog constructor inherits from Animal using Object.create() to set up the prototype chain. The bark method is added to the Dog.prototype, allowing instances of Dog to access and use that method.
 
-## Example 2: Prototypes with Classes
-
-ES6 introduced the class syntax, which also allows prototypes to be defined.
+Example 2: Class Inheritance
+ES6 introduced the class syntax, providing a more concise and intuitive way to achieve inheritance.
 
 Example:
 
 ```javascript
-class Animal {
-  constructor(name) {
-    this.name = name;
+class Vehicle {
+  constructor(make, model) {
+    this.make = make;
+    this.model = model;
   }
 
-  makeSound() {
-    console.log("Making a sound...");
+  startEngine() {
+    console.log("Engine started.");
   }
 }
 
-Animal.prototype.eat = function () {
-  console.log(`${this.name} is eating.`);
-};
+class Car extends Vehicle {
+  constructor(make, model, color) {
+    super(make, model);
+    this.color = color;
+  }
 
-const animal1 = new Animal("Lion");
-animal1.makeSound(); // Output: Making a sound...
-animal1.eat(); // Output: Lion is eating.
+  drive() {
+    console.log("Driving...");
+  }
+}
+
+const car1 = new Car("Toyota", "Camry", "Blue");
+car1.startEngine(); // Output: Engine started.
+car1.drive(); // Output: Driving...
 ```
 
-In the above example, the Animal class defines the makeSound method using the class syntax. The eat method is added to the Animal.prototype, making it accessible to all instances of Animal.
+In the above example, the Car class extends the Vehicle class using the extends keyword. The super keyword is used in the Car constructor to call the parent class constructor. This establishes the inheritance relationship, allowing Car instances to access the methods defined in Vehicle class.
 
-Prototypes provide a powerful mechanism for object inheritance and sharing functionality. They allow for efficient memory usage and support dynamic changes to objects at runtime.
+Inheritance provides a powerful mechanism for creating hierarchies of objects and promoting code reuse. It allows for the extension and specialization of existing objects, providing flexibility and maintainability.
