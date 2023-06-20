@@ -1,38 +1,35 @@
-// Example 1: Basic Closure
-function outerFunction() {
-  const outerVariable = "I'm from the outer function";
+// Example 1: Hoisting
+console.log(message); // Output: undefined
+var message = "Hello, world!";
 
-  function innerFunction() {
+// Example 2: Function Scope
+function greet() {
+  var name = "John";
+  console.log("Hello, " + name);
+}
+
+greet(); // Output: Hello, John
+console.log(name); // Output: ReferenceError: name is not defined
+
+// Example 3: Block Scope
+function count() {
+  for (var i = 1; i <= 5; i++) {
+    console.log(i);
+  }
+  console.log(i); // Output: 6
+}
+
+count();
+
+// Example 4: Lexical Scope
+function outer() {
+  var outerVariable = "I'm from outer function";
+
+  function inner() {
     console.log(outerVariable);
   }
 
-  return innerFunction;
+  inner(); // Output: I'm from outer function
 }
 
-const closure = outerFunction();
-closure(); // Output: I'm from the outer function
-
-// Example 2: Closure with Private Data
-function counter() {
-  let count = 0;
-
-  function increment() {
-    count++;
-    console.log(count);
-  }
-
-  function decrement() {
-    count--;
-    console.log(count);
-  }
-
-  return {
-    increment,
-    decrement
-  };
-}
-
-const counterInstance = counter();
-counterInstance.increment(); // Output: 1
-counterInstance.increment(); // Output: 2
-counterInstance.decrement(); // Output: 1
+outer();
