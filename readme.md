@@ -1,102 +1,45 @@
-# Control Structures
+# Functions
 
-Control structures in JavaScript are used to control the flow of execution in a program. Here are some commonly used control structures:
+Functions are reusable blocks of code that perform a specific task. They allow you to write code once and use it multiple times. In JavaScript, there are different ways to define functions.
 
-## If...Else
+## Function Declaration
 
-The `if...else` statement is used to execute a block of code based on a condition.
+Function declarations are defined using the `function` keyword followed by the function name and a set of parentheses containing optional parameters. The function body is enclosed in curly braces `{}`.
 
 Example:
 
 ```javascript
-let age = 18;
-
-if (age >= 18) {
-  console.log("You are eligible to vote.");
-} else {
-  console.log("You are not eligible to vote.");
+function greet(name) {
+  console.log(`Hello, ${name}!`);
 }
+
+greet("John"); // Output: Hello, John!
 ```
 
-## Else If
+## Function Expression
 
-The else if statement allows you to add additional conditions to be checked if the previous condition is not met.
+Function expressions are created by assigning an anonymous function to a variable. The function is defined without a name and can be stored in a variable for later use. The variable can then be invoked as a function.
 
 Example:
 
 ```javascript
-let time = 12;
+const greetExpression = function (name) {
+  console.log(`Hello, ${name}!`);
+};
 
-if (time < 12) {
-  console.log("Good morning!");
-} else if (time < 18) {
-  console.log("Good afternoon!");
-} else {
-  console.log("Good evening!");
-}
+greetExpression("Jane"); // Output: Hello, Jane!
 ```
 
-## Switch
+## Arrow Function
 
-The switch statement allows you to perform different actions based on different conditions.
-
-Example:
-
-```javascript
-let day = "Monday";
-
-switch (day) {
-  case "Monday":
-    console.log("Today is Monday.");
-    break;
-  case "Tuesday":
-    console.log("Today is Tuesday.");
-    break;
-  case "Wednesday":
-    console.log("Today is Wednesday.");
-    break;
-  default:
-    console.log("Today is some other day.");
-}
-```
-
-## For Loop
-
-A for loop is used to repeat a block of code a certain number of times.
+Arrow functions are a concise way to write functions in JavaScript. They are defined using arrow (=>) notation and do not require the function keyword. Arrow functions have a shorter syntax and lexically bind this to the surrounding context.
 
 Example:
 
 ```javascript
-for (let i = 0; i < 5; i++) {
-  console.log(i);
-}
-```
+const greetArrow = (name) => {
+  console.log(`Hello, ${name}!`);
+};
 
-## While Loop
-
-A while loop is used to execute a block of code repeatedly as long as a specified condition is true.
-
-Example:
-
-```javascript
-let count = 0;
-
-while (count < 5) {
-  console.log(count);
-  count++;
-}
-```
-
-Do...While Loop
-A do...while loop is used to execute a block of code once, and then repeat the execution as long as a specified condition is true.
-
-Example:
-
-```javascript
-let i = 0;
-
-do {
-  console.log(i);
-  i++;
-} while (i < 5);
+greetArrow("Alice"); // Output: Hello, Alice!
 ```
