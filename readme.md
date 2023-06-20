@@ -59,9 +59,9 @@ buttonElement.addEventListener("mouseover", () => {
 });
 ```
 
-> The JavaScript code selects elements using various methods, such as getElementById(), getElementsByClassName(), and getElementById().
-> It manipulates the content of the selected elements by modifying the textContent and innerHTML properties.
-> Event listeners are added to the button element to handle the click and mouseover events. When the button is clicked or the mouse hovers over it, corresponding messages are logged to the console.
+- The JavaScript code selects elements using various methods, such as getElementById(), getElementsByClassName(), and getElementById().
+- It manipulates the content of the selected elements by modifying the textContent and innerHTML properties.
+- Event listeners are added to the button element to handle the click and mouseover events. When the button is clicked or the mouse hovers over it, corresponding messages are logged to the console.
 
 ## Running the Example
 
