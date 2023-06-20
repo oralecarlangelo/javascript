@@ -1,31 +1,51 @@
-// Example 1: Prototypes with Constructors
-function Person(name, age) {
+// Example 1: Prototypal Inheritance
+function Animal(name) {
   this.name = name;
-  this.age = age;
 }
 
-Person.prototype.greet = function () {
-  console.log(`Hello, my name is ${this.name}`);
+Animal.prototype.makeSound = function () {
+  console.log("Making a sound...");
 };
 
-const person1 = new Person("John Doe", 30);
-person1.greet(); // Output: Hello, my name is John Doe
+function Dog(name, breed) {
+  Animal.call(this, name);
+  this.breed = breed;
+}
 
-// Example 2: Prototypes with Classes
-class Animal {
-  constructor(name) {
-    this.name = name;
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+
+Dog.prototype.bark = function () {
+  console.log("Barking...");
+};
+
+const dog1 = new Dog("Max", "Labrador");
+dog1.makeSound(); // Output: Making a sound...
+dog1.bark(); // Output: Barking...
+
+// Example 2: Class Inheritance
+class Vehicle {
+  constructor(make, model) {
+    this.make = make;
+    this.model = model;
   }
 
-  makeSound() {
-    console.log("Making a sound...");
+  startEngine() {
+    console.log("Engine started.");
   }
 }
 
-Animal.prototype.eat = function () {
-  console.log(`${this.name} is eating.`);
-};
+class Car extends Vehicle {
+  constructor(make, model, color) {
+    super(make, model);
+    this.color = color;
+  }
 
-const animal1 = new Animal("Lion");
-animal1.makeSound(); // Output: Making a sound...
-animal1.eat(); // Output: Lion is eating.
+  drive() {
+    console.log("Driving...");
+  }
+}
+
+const car1 = new Car("Toyota", "Camry", "Blue");
+car1.startEngine(); // Output: Engine started.
+car1.drive(); // Output: Driving...
