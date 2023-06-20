@@ -1,46 +1,38 @@
-const axios = require('axios');
+// Example 1: Basic Closure
+function outerFunction() {
+  const outerVariable = "I'm from the outer function";
 
-// Example 1: Using async/await with Promises
-function delay(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
-
-async function fetchData() {
-  await delay(2000);
-  return "Data fetched successfully.";
-}
-
-async function process() {
-  try {
-    const data = await fetchData();
-    console.log(data);
-  } catch (error) {
-    console.error(error);
+  function innerFunction() {
+    console.log(outerVariable);
   }
+
+  return innerFunction;
 }
 
-process();
-// Output (after 2 seconds): Data fetched successfully.
+const closure = outerFunction();
+closure(); // Output: I'm from the outer function
 
-// Example 2: Using async/await with Fetch API
-async function getUserData(username) {
-  try {
-    const response = await axios.get(`https://api.github.com/users/${username}`);
-    return response.data;
-  } catch (error) {
-    throw new Error("Failed to fetch user data.");
+// Example 2: Closure with Private Data
+function counter() {
+  let count = 0;
+
+  function increment() {
+    count++;
+    console.log(count);
   }
-}
 
-async function displayUserData(username) {
-  try {
-    const userData = await getUserData(username);
-    console.log(userData);
-  } catch (error) {
-    console.error(error);
+  function decrement() {
+    count--;
+    console.log(count);
   }
+
+  return {
+    increment,
+    decrement
+  };
 }
 
-displayUserData("oralecarlangelo");
+const counterInstance = counter();
+counterInstance.increment(); // Output: 1
+counterInstance.increment(); // Output: 2
+counterInstance.decrement(); // Output: 1
