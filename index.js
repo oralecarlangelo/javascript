@@ -1,51 +1,43 @@
-// Example 1: Prototypal Inheritance
-function Animal(name) {
-  this.name = name;
+// Pure Functions
+
+function add(a, b) {
+  return a + b;
 }
 
-Animal.prototype.makeSound = function () {
-  console.log("Making a sound...");
-};
+const result = add(2, 3);
+console.log(result); // Output: 5
 
-function Dog(name, breed) {
-  Animal.call(this, name);
-  this.breed = breed;
+// Higher-Order Functions
+
+function multiplyByTwo(number) {
+  return number * 2;
 }
 
-Dog.prototype = Object.create(Animal.prototype);
-Dog.prototype.constructor = Dog;
-
-Dog.prototype.bark = function () {
-  console.log("Barking...");
-};
-
-const dog1 = new Dog("Max", "Labrador");
-dog1.makeSound(); // Output: Making a sound...
-dog1.bark(); // Output: Barking...
-
-// Example 2: Class Inheritance
-class Vehicle {
-  constructor(make, model) {
-    this.make = make;
-    this.model = model;
+function transformArray(array, transformation) {
+  const transformedArray = [];
+  for (let i = 0; i < array.length; i++) {
+    transformedArray.push(transformation(array[i]));
   }
-
-  startEngine() {
-    console.log("Engine started.");
-  }
+  return transformedArray;
 }
 
-class Car extends Vehicle {
-  constructor(make, model, color) {
-    super(make, model);
-    this.color = color;
-  }
+const numbers = [1, 2, 3, 4, 5];
+const doubledNumbers = transformArray(numbers, multiplyByTwo);
+console.log(doubledNumbers); // Output: [2, 4, 6, 8, 10]
 
-  drive() {
-    console.log("Driving...");
-  }
+// Functional Composition
+
+function add(a, b) {
+  return a + b;
 }
 
-const car1 = new Car("Toyota", "Camry", "Blue");
-car1.startEngine(); // Output: Engine started.
-car1.drive(); // Output: Driving...
+function multiplyByTwo(number) {
+  return number * 2;
+}
+
+function subtractOne(number) {
+  return number - 1;
+}
+
+const fcResult = subtractOne(multiplyByTwo(add(2, 3)));
+console.log(result); // Output: 9
