@@ -1,70 +1,62 @@
-# Async/Await
+# Closures
 
-Async/await is a modern JavaScript syntax for handling asynchronous operations in a more synchronous and readable manner. It is built on top of Promises and provides a simpler way to write asynchronous code that resembles synchronous code.
+In JavaScript, a closure is a combination of a function and the lexical environment within which that function was declared. It allows a function to access variables from its outer (enclosing) scope even after the outer function has finished executing. Closures are a powerful and important concept in JavaScript.
 
-## Example 1: Using async/await with Promises
+## Example 1: Basic Closure
 
-Async/await can be used with Promises to write asynchronous code that looks and behaves more synchronously.
-
-Example:
-
-```javascript
-function delay(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
-
-async function fetchData() {
-  await delay(2000);
-  return "Data fetched successfully.";
-}
-
-async function process() {
-  try {
-    const data = await fetchData();
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-process();
-```
-
-In the above example, the fetchData function returns a Promise that resolves after a delay of 2000 milliseconds. The process function uses the await keyword to wait for the Promise to resolve and then logs the fetched data to the console.
-
-## Example 2: Using async/await with Axios
-Async/await can also be used with libraries like axios to simplify making asynchronous HTTP requests.
+A basic closure example involves an outer function that returns an inner function. The inner function maintains access to the variables of the outer function even after the outer function has finished executing.
 
 Example:
 
 ```javascript
-const axios = require("axios");
+function outerFunction() {
+  const outerVariable = "I'm from the outer function";
 
-async function getUserData(username) {
-  try {
-    const response = await axios.get(
-      `https://api.github.com/users/${username}`
-    );
-    return response.data;
-  } catch (error) {
-    throw new Error("Failed to fetch user data.");
+  function innerFunction() {
+    console.log(outerVariable);
   }
+
+  return innerFunction;
 }
 
-async function displayUserData(username) {
-  try {
-    const userData = await getUserData(username);
-    console.log(userData);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-displayUserData("oralecarlangelo");
+const closure = outerFunction();
+closure(); // Output: I'm from the outer function
 ```
 
-In the above example, the getUserData function uses axios to make an HTTP GET request to the GitHub API endpoint for a specific username. The response data is accessed using response.data, and it is returned as the result of the function. If an error occurs during the request or response, an error is thrown.
+In the above example, the outerFunction creates a variable outerVariable, and then returns the innerFunction. When outerFunction is invoked and assigned to closure, it creates a closure, preserving the reference to outerVariable. When closure is invoked, it can still access and log the value of outerVariable.
 
-Async/await in combination with axios provides a clean and straightforward way to handle asynchronous HTTP requests in JavaScript.
+## Example 2: Closure with Private Data
+
+Closures are often used to create functions with private data. By enclosing variables within an outer function, we can create functions that can access and modify those variables but keep them hidden from the outside world.
+
+Example:
+
+```javascript
+function counter() {
+  let count = 0;
+
+  function increment() {
+    count++;
+    console.log(count);
+  }
+
+  function decrement() {
+    count--;
+    console.log(count);
+  }
+
+  return {
+    increment,
+    decrement,
+  };
+}
+
+const counterInstance = counter();
+counterInstance.increment(); // Output: 1
+counterInstance.increment(); // Output: 2
+counterInstance.decrement(); // Output: 1
+```
+
+In the above example, the counter function returns an object with two methods: increment and decrement. These methods have access to the count variable, which is hidden from the outside world. Each time the methods are invoked, they can access and modify the count variable.
+
+Closures are powerful tools in JavaScript that enable various patterns and techniques, such as data encapsulation and the module pattern.
