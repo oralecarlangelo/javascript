@@ -1,31 +1,31 @@
-// Example 1: Constructors and Instances
+// Example 1: Prototypes with Constructors
 function Person(name, age) {
   this.name = name;
   this.age = age;
 }
 
+Person.prototype.greet = function () {
+  console.log(`Hello, my name is ${this.name}`);
+};
+
 const person1 = new Person("John Doe", 30);
-console.log(person1.name); // Output: John Doe
-console.log(person1.age); // Output: 30
+person1.greet(); // Output: Hello, my name is John Doe
 
-const person2 = new Person("Jane Smith", 25);
-console.log(person2.name); // Output: Jane Smith
-console.log(person2.age); // Output: 25
-
-// Example 2: ES6 Classes
-class Car {
-  constructor(brand, model) {
-    this.brand = brand;
-    this.model = model;
+// Example 2: Prototypes with Classes
+class Animal {
+  constructor(name) {
+    this.name = name;
   }
 
-  getDetails() {
-    return `${this.brand} ${this.model}`;
+  makeSound() {
+    console.log("Making a sound...");
   }
 }
 
-const car1 = new Car("Toyota", "Camry");
-console.log(car1.getDetails()); // Output: Toyota Camry
+Animal.prototype.eat = function () {
+  console.log(`${this.name} is eating.`);
+};
 
-const car2 = new Car("Honda", "Accord");
-console.log(car2.getDetails()); // Output: Honda Accord
+const animal1 = new Animal("Lion");
+animal1.makeSound(); // Output: Making a sound...
+animal1.eat(); // Output: Lion is eating.
