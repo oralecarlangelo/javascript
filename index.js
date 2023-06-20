@@ -1,23 +1,30 @@
-// Example 1: "this" in Object Method
-const person = {
-  name: "John",
-  age: 30,
-  greet: function () {
-    console.log(`Hello, my name is ${this.name} and I'm ${this.age} years old.`);
-  }
-};
-
-person.greet(); // Output: Hello, my name is John and I'm 30 years old.
-
-// Example 2: "this" in Function Constructor
-function Car(make, model) {
-  this.make = make;
-  this.model = model;
+// Example 1: Callback Function
+function greet(name, callback) {
+  console.log(`Hello, ${name}!`);
+  callback();
 }
 
-Car.prototype.getDetails = function () {
-  console.log(`This car is a ${this.make} ${this.model}.`);
-};
+function sayGoodbye() {
+  console.log("Goodbye!");
+}
 
-const myCar = new Car("Toyota", "Camry");
-myCar.getDetails(); // Output: This car is a Toyota Camry.
+greet("John", sayGoodbye);
+// Output:
+// Hello, John!
+// Goodbye!
+
+// Example 2: Callback with Asynchronous Operation
+function fetchData(callback) {
+  setTimeout(() => {
+    const data = "This is the fetched data.";
+    callback(data);
+  }, 2000);
+}
+
+function processData(data) {
+  console.log(`Processing data: ${data}`);
+}
+
+fetchData(processData);
+// Output (after 2 seconds):
+// Processing data: This is the fetched data.
