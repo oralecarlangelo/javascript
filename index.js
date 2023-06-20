@@ -1,44 +1,46 @@
-// Example 1: Creating a Promise
-const promise = new Promise((resolve, reject) => {
-  // Simulating an asynchronous operation
-  setTimeout(() => {
-    const success = true;
+const axios = require('axios');
 
-    if (success) {
-      resolve("Operation completed successfully.");
-    } else {
-      reject("Operation failed.");
-    }
-  }, 2000);
-});
+// Example 1: Using async/await with Promises
+function delay(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
 
-promise
-  .then((result) => {
-    console.log(result);
-  })
-  .catch((error) => {
+async function fetchData() {
+  await delay(2000);
+  return "Data fetched successfully.";
+}
+
+async function process() {
+  try {
+    const data = await fetchData();
+    console.log(data);
+  } catch (error) {
     console.error(error);
-  });
-// Output (after 2 seconds): Operation completed successfully.
+  }
+}
 
-// Example 2: Chaining Promises
-const multiply = (num) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const result = num * 2;
-      resolve(result);
-    }, 1000);
-  });
-};
+process();
+// Output (after 2 seconds): Data fetched successfully.
 
-multiply(3)
-  .then((result) => {
-    console.log(result); // Output: 6
-    return multiply(result);
-  })
-  .then((result) => {
-    console.log(result); // Output: 12
-  })
-  .catch((error) => {
+// Example 2: Using async/await with Fetch API
+async function getUserData(username) {
+  try {
+    const response = await axios.get(`https://api.github.com/users/${username}`);
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to fetch user data.");
+  }
+}
+
+async function displayUserData(username) {
+  try {
+    const userData = await getUserData(username);
+    console.log(userData);
+  } catch (error) {
     console.error(error);
-  });
+  }
+}
+
+displayUserData("oralecarlangelo");
