@@ -30,7 +30,7 @@ promise
   });
 ```
 
-In the above example, a Promise is created to simulate an asynchronous operation that takes 2 seconds to complete. The Promise will either resolve with a success message or reject with an error message based on the value of the success variable. The .then() method is used to handle the resolved state, and the .catch() method is used to handle the rejected state.
+In the above example, a Promise is created to simulate an asynchronous operation that takes 2 seconds to complete. The Promise will either `resolve` with a success message or `reject` with an error message based on the value of the success variable. The `.then()` method is used to handle the resolved state, and the `.catch()` method is used to handle the rejected state.
 
 ## Example 2: Chaining Promises
 
@@ -61,6 +61,6 @@ multiply(3)
   });
 ```
 
-In the above example, the multiply function returns a Promise that resolves with the result of multiplying the given number by 2. The Promises are chained together using the .then() method, allowing the subsequent .then() to operate on the resolved value of the previous Promise.
+In the above example, the `multiply` function returns a Promise that resolves with the result of multiplying the given number by 2. The Promises are chained together using the `.then()` method, allowing the subsequent `.then()` to operate on the resolved value of the previous Promise.
 
 Promises provide a more elegant and readable way to handle asynchronous operations, making the code easier to understand and maintain.
