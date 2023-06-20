@@ -1,49 +1,49 @@
-# Understanding "this" Keyword
+# Callbacks
 
-In JavaScript, the "this" keyword refers to the object that is currently executing the code. It provides a way to access and manipulate the properties and methods of the object within the context of the code.
+In JavaScript, a callback is a function that is passed as an argument to another function and is invoked after a certain operation or task is completed. Callbacks are commonly used for handling asynchronous operations and achieving better control flow.
 
-## Example 1: "this" in Object Method
+## Example 1: Callback Function
 
-In the context of an object method, "this" refers to the object itself. It allows you to access the object's properties and invoke its methods.
-
-Example:
-
-```javascript
-const person = {
-  name: "John",
-  age: 30,
-  greet: function () {
-    console.log(
-      `Hello, my name is ${this.name} and I'm ${this.age} years old.`
-    );
-  },
-};
-
-person.greet(); // Output: Hello, my name is John and I'm 30 years old.
-```
-
-In the above example, when the greet() method is invoked on the person object, this refers to the person object itself, allowing access to its name and age properties.
-
-## Example 2: "this" in Function Constructor
-
-In the context of a function constructor, "this" refers to the newly created object when using the new keyword. It allows you to assign properties and methods to the created object.
+A callback function can be used to execute code after a specific task is completed.
 
 Example:
 
 ```javascript
-function Car(make, model) {
-  this.make = make;
-  this.model = model;
+function greet(name, callback) {
+  console.log(`Hello, ${name}!`);
+  callback();
 }
 
-Car.prototype.getDetails = function () {
-  console.log(`This car is a ${this.make} ${this.model}.`);
-};
+function sayGoodbye() {
+  console.log("Goodbye!");
+}
 
-const myCar = new Car("Toyota", "Camry");
-myCar.getDetails(); // Output: This car is a Toyota Camry.
+greet("John", sayGoodbye);
 ```
 
-In the above example, when the Car constructor function is invoked with the new keyword, this refers to the newly created object (myCar). The make and model properties are assigned to the myCar object, and the getDetails() method is added to the object's prototype.
+In the above example, the greet function takes a name parameter and a callback function. After greeting the person by name, the callback function sayGoodbye is invoked, resulting in the message "Goodbye!" being logged to the console.
 
-Understanding the usage of the "this" keyword is crucial in JavaScript to access and manipulate object properties and methods within the appropriate context
+## Example 2: Callback with Asynchronous Operation
+
+Callbacks are commonly used in asynchronous operations, such as fetching data from an API or performing time-consuming tasks.
+
+Example:
+
+```javascript
+function fetchData(callback) {
+  setTimeout(() => {
+    const data = "This is the fetched data.";
+    callback(data);
+  }, 2000);
+}
+
+function processData(data) {
+  console.log(`Processing data: ${data}`);
+}
+
+fetchData(processData);
+```
+
+In the above example, the fetchData function simulates an asynchronous operation that takes 2 seconds to complete. After the data is fetched, the callback function processData is invoked with the fetched data as an argument, resulting in the message "Processing data: This is the fetched data." being logged to the console.
+
+Callbacks provide a flexible way to handle asynchronous operations, allowing you to control the flow of execution and perform actions after a specific task is finished.
