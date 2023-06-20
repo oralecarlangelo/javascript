@@ -1,66 +1,70 @@
-# Promises
+# Async/Await
 
-Promises are a powerful feature in JavaScript for handling asynchronous operations. They provide a way to write cleaner and more manageable code when dealing with operations that may take some time to complete.
+Async/await is a modern JavaScript syntax for handling asynchronous operations in a more synchronous and readable manner. It is built on top of Promises and provides a simpler way to write asynchronous code that resembles synchronous code.
 
-## Example 1: Creating a Promise
+## Example 1: Using async/await with Promises
 
-A Promise represents the eventual completion or failure of an asynchronous operation. It can be in one of three states: `pending`, `fulfilled`, or `rejected`.
-
-Example:
-
-```javascript
-const promise = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    const success = true;
-
-    if (success) {
-      resolve("Operation completed successfully.");
-    } else {
-      reject("Operation failed.");
-    }
-  }, 2000);
-});
-
-promise
-  .then((result) => {
-    console.log(result);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-```
-
-In the above example, a Promise is created to simulate an asynchronous operation that takes 2 seconds to complete. The Promise will either `resolve` with a success message or `reject` with an error message based on the value of the success variable. The `.then()` method is used to handle the resolved state, and the `.catch()` method is used to handle the rejected state.
-
-## Example 2: Chaining Promises
-
-Promises can be chained together to perform a sequence of asynchronous operations.
+Async/await can be used with Promises to write asynchronous code that looks and behaves more synchronously.
 
 Example:
 
 ```javascript
-const multiply = (num) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const result = num * 2;
-      resolve(result);
-    }, 1000);
+function delay(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
   });
-};
+}
 
-multiply(3)
-  .then((result) => {
-    console.log(result); // Output: 6
-    return multiply(result);
-  })
-  .then((result) => {
-    console.log(result); // Output: 12
-  })
-  .catch((error) => {
+async function fetchData() {
+  await delay(2000);
+  return "Data fetched successfully.";
+}
+
+async function process() {
+  try {
+    const data = await fetchData();
+    console.log(data);
+  } catch (error) {
     console.error(error);
-  });
+  }
+}
+
+process();
 ```
 
-In the above example, the `multiply` function returns a Promise that resolves with the result of multiplying the given number by 2. The Promises are chained together using the `.then()` method, allowing the subsequent `.then()` to operate on the resolved value of the previous Promise.
+In the above example, the fetchData function returns a Promise that resolves after a delay of 2000 milliseconds. The process function uses the await keyword to wait for the Promise to resolve and then logs the fetched data to the console.
 
-Promises provide a more elegant and readable way to handle asynchronous operations, making the code easier to understand and maintain.
+## Example 2: Using async/await with Axios
+Async/await can also be used with libraries like axios to simplify making asynchronous HTTP requests.
+
+Example:
+
+```javascript
+const axios = require("axios");
+
+async function getUserData(username) {
+  try {
+    const response = await axios.get(
+      `https://api.github.com/users/${username}`
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to fetch user data.");
+  }
+}
+
+async function displayUserData(username) {
+  try {
+    const userData = await getUserData(username);
+    console.log(userData);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+displayUserData("oralecarlangelo");
+```
+
+In the above example, the getUserData function uses axios to make an HTTP GET request to the GitHub API endpoint for a specific username. The response data is accessed using response.data, and it is returned as the result of the function. If an error occurs during the request or response, an error is thrown.
+
+Async/await in combination with axios provides a clean and straightforward way to handle asynchronous HTTP requests in JavaScript.
