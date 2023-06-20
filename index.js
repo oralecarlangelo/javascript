@@ -1,19 +1,20 @@
-// Object Destructuring
-const person = {
-  name: "John Doe",
-  age: 30,
-  city: "New York"
-};
+// Selection of elements
+const titleElement = document.getElementById("title");
+const contentElements = document.getElementsByClassName("content");
+const buttonElement = document.getElementById("myButton");
 
-const { name, age, city } = person;
-console.log(name); // Output: John Doe
-console.log(age); // Output: 30
-console.log(city); // Output: New York
+// Manipulating content
+titleElement.textContent = "Updated Title";
 
-// Array Destructuring
-const numbers = [1, 2, 3, 4, 5];
+for (let i = 0; i < contentElements.length; i++) {
+  contentElements[i].innerHTML = "Updated content " + (i + 1);
+}
 
-const [first, second, , fourth] = numbers;
-console.log(first); // Output: 1
-console.log(second); // Output: 2
-console.log(fourth); // Output: 4
+// Handling events
+buttonElement.addEventListener("click", () => {
+  console.log("Button clicked!");
+});
+
+buttonElement.addEventListener("mouseover", () => {
+  console.log("Mouse over button!");
+});
