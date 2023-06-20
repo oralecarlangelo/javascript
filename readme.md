@@ -1,10 +1,10 @@
-# Constructors/Classes
+# Prototypes
 
-Constructors and classes are fundamental concepts in object-oriented programming (OOP). They allow you to create objects with predefined properties and behaviors.
+Prototypes are an essential part of JavaScript's object-oriented programming model. They allow objects to inherit properties and methods from other objects. Prototypes provide a way to share common functionality across multiple objects efficiently.
 
-## Example 1: Constructors and Instances
+## Example 1: Prototypes with Constructors
 
-In JavaScript, constructors are functions used to create objects. They define the initial state and behavior of objects created from them. Instances of objects are created using the `new` keyword along with the constructor function.
+In JavaScript, every object has a prototype that acts as a blueprint for that object's properties and methods. Prototypes can be created using constructor functions.
 
 Example:
 
@@ -14,41 +14,42 @@ function Person(name, age) {
   this.age = age;
 }
 
-const person1 = new Person("John Doe", 30);
-console.log(person1.name); // Output: John Doe
-console.log(person1.age); // Output: 30
+Person.prototype.greet = function () {
+  console.log(`Hello, my name is ${this.name}`);
+};
 
-const person2 = new Person("Jane Smith", 25);
-console.log(person2.name); // Output: Jane Smith
-console.log(person2.age); // Output: 25
+const person1 = new Person("John Doe", 30);
+person1.greet(); // Output: Hello, my name is John Doe
 ```
 
-In the above example, the Person constructor function is used to create instances of Person objects. Each instance has a name and age property.
+In the above example, the Person constructor function defines the name and age properties for instances of Person. The greet method is added to the Person.prototype, which allows all instances of Person to access and use that method.
 
-## Example 2: ES6 Classes
-ES6 introduced the class syntax as a more concise way to define constructors and create objects. Classes provide a cleaner and more familiar syntax for creating objects with methods.
+## Example 2: Prototypes with Classes
+
+ES6 introduced the class syntax, which also allows prototypes to be defined.
 
 Example:
 
 ```javascript
-class Car {
-  constructor(brand, model) {
-    this.brand = brand;
-    this.model = model;
+class Animal {
+  constructor(name) {
+    this.name = name;
   }
 
-  getDetails() {
-    return `${this.brand} ${this.model}`;
+  makeSound() {
+    console.log("Making a sound...");
   }
 }
 
-const car1 = new Car("Toyota", "Camry");
-console.log(car1.getDetails()); // Output: Toyota Camry
+Animal.prototype.eat = function () {
+  console.log(`${this.name} is eating.`);
+};
 
-const car2 = new Car("Honda", "Accord");
-console.log(car2.getDetails()); // Output: Honda Accord
+const animal1 = new Animal("Lion");
+animal1.makeSound(); // Output: Making a sound...
+animal1.eat(); // Output: Lion is eating.
 ```
 
-In the above example, the Car class defines a constructor that takes brand and model parameters. It also defines a getDetails method that returns the details of the car. Instances of the Car class are created using the new keyword.
+In the above example, the Animal class defines the makeSound method using the class syntax. The eat method is added to the Animal.prototype, making it accessible to all instances of Animal.
 
-Constructors and classes are foundational concepts in OOP, allowing you to create objects with properties and behaviors that can be easily reused and extended.
+Prototypes provide a powerful mechanism for object inheritance and sharing functionality. They allow for efficient memory usage and support dynamic changes to objects at runtime.
