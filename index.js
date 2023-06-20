@@ -1,43 +1,26 @@
-// Pure Functions
+// Try/Catch
 
-function add(a, b) {
-  return a + b;
+try {
+  // Code that might throw an error
+  const result = 10 / 0; // Division by zero
+  console.log(result); // This line won't be executed
+} catch (error) {
+  // Code to handle the error
+  console.error("An error occurred:", error);
 }
 
-const result = add(2, 3);
-console.log(result); // Output: 5
+// Throwing Errors
 
-// Higher-Order Functions
-
-function multiplyByTwo(number) {
-  return number * 2;
-}
-
-function transformArray(array, transformation) {
-  const transformedArray = [];
-  for (let i = 0; i < array.length; i++) {
-    transformedArray.push(transformation(array[i]));
+function divide(a, b) {
+  if (b === 0) {
+    throw new Error("Cannot divide by zero");
   }
-  return transformedArray;
+  return a / b;
 }
 
-const numbers = [1, 2, 3, 4, 5];
-const doubledNumbers = transformArray(numbers, multiplyByTwo);
-console.log(doubledNumbers); // Output: [2, 4, 6, 8, 10]
-
-// Functional Composition
-
-function add(a, b) {
-  return a + b;
+try {
+  const result = divide(10, 0); // Throws an error
+  console.log(result); // This line won't be executed
+} catch (error) {
+  console.error("An error occurred:", error);
 }
-
-function multiplyByTwo(number) {
-  return number * 2;
-}
-
-function subtractOne(number) {
-  return number - 1;
-}
-
-const fcResult = subtractOne(multiplyByTwo(add(2, 3)));
-console.log(result); // Output: 9
