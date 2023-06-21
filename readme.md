@@ -1,45 +1,50 @@
-Revealing Module Pattern
-The Revealing Module pattern is an extension of the Module pattern that aims to reveal only the necessary public members, while keeping the rest of the implementation private. It helps to encapsulate functionality, provide a clean and organized API, and prevent access to private members.
+# Singleton Pattern
+
+The Singleton pattern is a design pattern in JavaScript that restricts the instantiation of a class to a single object. It ensures that only one instance of a class exists throughout the application and provides a global point of access to that instance.
 
 Usage
-To use the Revealing Module pattern, follow these steps:
+To implement the Singleton pattern, follow these steps:
 
-1. Create an immediately-invoked function expression (IIFE) that serves as the module.
-2. Inside the module, define private variables and functions that are inaccessible from the outside.
-3. Define public functions that will be revealed and accessible outside the module.
-4. Return an object or a set of functions from the module, representing the public API.
+1. Create a class with a private constructor and a private static variable to hold the single instance.
+2. Define a static method to access the instance, and if the instance doesn't exist, create it.
+3. Use the static method to access the single instance of the class throughout the application.
 
 ## Example
 
 ```javascript
-const RevealingModule = (function () {
-  let privateVar = "I am private";
-
-  function privateFunction() {
-    console.log("This is a private function");
+class Singleton {
+  constructor() {
+    // Private variable
+    this.data = "Singleton instance created";
   }
 
-  function publicFunction() {
-    console.log("This is a public function");
+  static getInstance() {
+    if (!Singleton.instance) {
+      Singleton.instance = new Singleton();
+    }
+    return Singleton.instance;
   }
 
-  return {
-    publicFunction: publicFunction,
-  };
-})();
+  getData() {
+    return this.data;
+  }
+}
 
-RevealingModule.publicFunction(); // Output: This is a public function
-RevealingModule.privateFunction(); // Output: TypeError: RevealingModule.privateFunction is not a function
+const instance1 = Singleton.getInstance();
+console.log(instance1.getData()); // Output: Singleton instance created
+
+const instance2 = Singleton.getInstance();
+console.log(instance2.getData()); // Output: Singleton instance created
+
+console.log(instance1 === instance2); // Output: true (both instances are the same)
 ```
 
-In the example above, we create a Revealing Module using an immediately-invoked function expression (IIFE). Inside the module, we define a private variable privateVar and a private function privateFunction. We also define a public function publicFunction that will be accessible outside the module.
+In the example above, we create a Singleton class with a private constructor and a private static variable instance to hold the single instance of the class. The getInstance method is a static method that returns the single instance of the class. If the instance doesn't exist, it creates a new instance. The getData method returns the data of the Singleton instance.
 
-By returning an object with the desired public functions, we reveal only those specific functions as the public API of the module. Attempts to access private variables or call private functions from outside the module will result in an error.
-
-To use the Revealing Module, we simply invoke the public functions through the module object. In the example, we invoke RevealingModule.publicFunction() to demonstrate the accessibility of the public function.
+To access the Singleton instance, we call the static method getInstance(). Both instance1 and instance2 refer to the same instance of the Singleton class, as confirmed by the comparison instance1 === instance2 which outputs true.
 
 ## Benefits
 
-- Encapsulation: Private variables and functions are hidden and can only be accessed through the revealed public API.
-- Clear API: The Revealing Module pattern allows for a clear and organized API, making it easier to understand and use the module.
-- Prevents Collisions: By keeping private members hidden, potential naming collisions with other parts of the codebase are minimized.
+- Single Instance: The Singleton pattern ensures that only one instance of a class exists throughout the application.
+- Global Access: The Singleton instance can be accessed globally, providing a centralized point of access.
+- Lazy Initialization: The Singleton instance is created when it is first accessed, allowing for lazy initialization and efficient resource usage.
