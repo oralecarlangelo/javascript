@@ -1,25 +1,36 @@
-class Singleton {
+// Product classes
+class ProductA {
   constructor() {
-    // Private variable
-    this.data = 'Singleton instance created';
+    this.name = 'Product A';
   }
+  // ...
+}
 
-  static getInstance() {
-    if (!Singleton.instance) {
-      Singleton.instance = new Singleton();
+class ProductB {
+  constructor() {
+    this.name = 'Product B';
+  }
+  // ...
+}
+
+// Factory class
+class Factory {
+  createProduct(type) {
+    if (type === 'A') {
+      return new ProductA();
+    } else if (type === 'B') {
+      return new ProductB();
+    } else {
+      throw new Error('Invalid product type.');
     }
-    return Singleton.instance;
-  }
-
-  getData() {
-    return this.data;
   }
 }
 
-const instance1 = Singleton.getInstance();
-console.log(instance1.getData()); // Output: Singleton instance created
+// Usage
+const factory = new Factory();
 
-const instance2 = Singleton.getInstance();
-console.log(instance2.getData()); // Output: Singleton instance created
+const productA = factory.createProduct('A');
+console.log(productA.name); // Output: Product A
 
-console.log(instance1 === instance2); // Output: true (both instances are the same)
+const productB = factory.createProduct('B');
+console.log(productB.name); // Output: Product B
