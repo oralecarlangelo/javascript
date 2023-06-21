@@ -1,11 +1,11 @@
-console.log('Start');
+const list = document.querySelector('ul');
 
-setTimeout(() => {
-  console.log('SetTimeout');
-}, 0);
-
-Promise.resolve().then(() => {
-  console.log('Promise');
+list.addEventListener('click', (event) => {
+  if (event.target.tagName === 'LI') {
+    event.target.style.backgroundColor = 'yellow';
+  }
 });
 
-console.log('End');
+document.addEventListener('click', (event) => {
+  console.log('Clicked element:', event.target);
+});
