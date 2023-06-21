@@ -1,30 +1,84 @@
-// Creating and Removing Elements
+const axios = require("axios");
+const XMLHttpRequest = require('xhr2');
 
-// Creating a new element
-const newElement = document.createElement("div");
-newElement.textContent = "New element";
-newElement.className = "box";
+// Promises
 
-// Appending the new element to an existing element
-const container = document.getElementById("container");
-container.appendChild(newElement);
-
-// Removing an element
-const elementToRemove = document.getElementById("element-to-remove");
-if (elementToRemove) {
-  elementToRemove.remove();
+function fetchData() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const data = "Data fetched successfully.";
+      resolve(data);
+      // reject(new Error("Failed to fetch data."));
+    }, 2000);
+  });
 }
 
-// Traversing the DOM
+fetchData()
+  .then((data) => {
+    console.log(data); // Output: Data fetched successfully.
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 
-// Accessing parent element
-const parentElement = container.parentNode;
+// Async/Await
 
-// Accessing sibling elements
-const previousSibling = container.previousElementSibling;
-const nextSibling = container.nextElementSibling;
+async function fetchDataAsync() {
+  try {
+    const data = await fetchData();
+    console.log(data); // Output: Data fetched successfully.
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-// Accessing child elements
-const children = container.children;
-const firstChild = container.firstElementChild;
-const lastChild = container.lastElementChild;
+fetchDataAsync();
+
+// AJAX with XMLHttpRequest
+
+function fetchUserWithXHR(username) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `https://api.github.com/users/${username}`);
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        const data = JSON.parse(xhr.responseText);
+        resolve(data);
+      } else {
+        reject(new Error("Failed to fetch user data."));
+      }
+    };
+    xhr.onerror = function () {
+      reject(new Error("Failed to make a request."));
+    };
+    xhr.send();
+  });
+}
+
+fetchUserWithXHR("oralecarlangelo")
+  .then((user) => {
+    console.log(user); // Output: User data
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+// Working with Axios
+
+function fetchUserWithAxios(username) {
+  return axios.get(`https://api.github.com/users/${username}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw new Error("Failed to fetch user data.");
+    });
+}
+
+fetchUserWithAxios("oralecarlangelo")
+  .then((user) => {
+    console.log(user); // Output: User data
+  })
+  .catch((error) => {
+    console.error(error);
+  });
