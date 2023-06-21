@@ -1,21 +1,18 @@
-const Module = (function () {
-  // Private variables and functions
+const RevealingModule = (function () {
   let privateVar = 'I am private';
 
   function privateFunction() {
     console.log('This is a private function');
   }
 
-  // Public API
+  function publicFunction() {
+    console.log('This is a public function');
+  }
+
   return {
-    publicVar: 'I am public',
-    publicFunction: function () {
-      console.log('This is a public function');
-    },
+    publicFunction: publicFunction,
   };
 })();
 
-console.log(Module.publicVar); // Output: I am public
-Module.publicFunction(); // Output: This is a public function
-console.log(Module.privateVar); // Output: undefined
-Module.privateFunction(); // Output: TypeError: Module.privateFunction is not a function
+RevealingModule.publicFunction(); // Output: This is a public function
+RevealingModule.privateFunction(); // Output: TypeError: RevealingModule.privateFunction is not a function
