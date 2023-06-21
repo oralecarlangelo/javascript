@@ -1,18 +1,25 @@
-const RevealingModule = (function () {
-  let privateVar = 'I am private';
-
-  function privateFunction() {
-    console.log('This is a private function');
+class Singleton {
+  constructor() {
+    // Private variable
+    this.data = 'Singleton instance created';
   }
 
-  function publicFunction() {
-    console.log('This is a public function');
+  static getInstance() {
+    if (!Singleton.instance) {
+      Singleton.instance = new Singleton();
+    }
+    return Singleton.instance;
   }
 
-  return {
-    publicFunction: publicFunction,
-  };
-})();
+  getData() {
+    return this.data;
+  }
+}
 
-RevealingModule.publicFunction(); // Output: This is a public function
-RevealingModule.privateFunction(); // Output: TypeError: RevealingModule.privateFunction is not a function
+const instance1 = Singleton.getInstance();
+console.log(instance1.getData()); // Output: Singleton instance created
+
+const instance2 = Singleton.getInstance();
+console.log(instance2.getData()); // Output: Singleton instance created
+
+console.log(instance1 === instance2); // Output: true (both instances are the same)
