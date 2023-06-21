@@ -1,55 +1,96 @@
-# Event Delegation and Bubbling
+## Debouncing and Throttling
 
-Event delegation and bubbling are concepts in JavaScript that allow you to handle events efficiently and effectively, especially when dealing with multiple elements or dynamically created elements.
+Debouncing and throttling are techniques used to control the frequency of execution of a function in response to frequent events, such as scroll events or keystrokes. These techniques help optimize performance, reduce unnecessary function calls, and improve user experience.
 
-## Event Delegation
+# Debouncing
 
-Event delegation is a technique where you attach an event listener to a parent element instead of individual child elements. The parent element listens for events that bubble up from its child elements. This approach is useful when you have a large number of child elements or dynamically created elements.
+Debouncing is a technique that delays the execution of a function until after a certain period of inactivity. It ensures that the function is called only once after a series of rapid-fire events, with a specified delay before invoking the function.
 
-The key steps for event delegation are as follows:
+The key steps for implementing debouncing are as follows:
 
-Identify a parent element that will contain all the child elements of interest.
-Attach an event listener to the parent element.
-Inside the event listener, determine the specific child element that triggered the event using event.target.
-Perform the desired action based on the event and the target element.
-Example
-Suppose we have an unordered list (ul) with multiple list items (li) as child elements. We want to change the background color of a list item when it is clicked. Instead of attaching an event listener to each list item, we can use event delegation by attaching the event listener to the parent unordered list.
-
-```javascript
-const list = document.querySelector("ul");
-
-list.addEventListener("click", (event) => {
-  if (event.target.tagName === "LI") {
-    event.target.style.backgroundColor = "yellow";
-  }
-});
-```
-
-In the example above, we attach the click event listener to the parent unordered list (list). When a list item is clicked, the event bubbles up to the parent, and we can access the specific list item using event.target. We check if the target element's tag name is 'LI' and then change its background color to yellow.
-
-By using event delegation, we only need one event listener on the parent element, regardless of the number of child elements. This reduces memory usage and simplifies event management, especially when dynamically adding or removing child elements.
-
-## Event Bubbling
-
-Event bubbling is the process where an event triggered on an element also triggers the same event on its parent elements, propagating up the DOM tree until it reaches the document object. This allows you to handle events at different levels of the DOM hierarchy.
-
-When an event occurs on an element, it triggers the event handlers for that specific element first, then the handlers for its parent elements, and so on, until it reaches the document object. This behavior is known as event bubbling.
+1. Define a delay period, often referred to as the debounce threshold.
+2. Set up an event handler that triggers the function on the desired event.
+3. Implement a mechanism to delay the function execution using setTimeout.
+4. Cancel any previous setTimeout if the event occurs again within the debounce threshold.
+5. Invoke the function after the debounce threshold has passed since the last event.
 
 Example
-Suppose we have an HTML structure with nested elements, and we want to log a message whenever any element is clicked, including its parent elements.
 
 ```javascript
-document.addEventListener("click", (event) => {
-  console.log("Clicked element:", event.target);
-});
+function debounce(func, delay) {
+  let timeoutId;
+
+  return function (...args) {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+
+function handleScroll() {
+  console.log("Handling scroll event...");
+  // Perform scroll-related tasks here
+}
+
+const debouncedScroll = debounce(handleScroll, 200);
+
+window.addEventListener("scroll", debouncedScroll);
 ```
 
-In the example above, we attach a click event listener to the document object. When any element is clicked, the event bubbles up to the document, triggering the event listener. We log the clicked element (event.target) to the console.
+In the example above, we define a debounce function that takes a func (the function to debounce) and a delay (the debounce threshold) as parameters. The debounce function returns a new function that wraps the original function and adds the debouncing behavior.
 
-Event bubbling allows you to handle events in a more generic and flexible way. You can attach a single event listener to a common ancestor element and capture events from multiple child elements without the need for individual event listeners.
+We define a handleScroll function that represents the actual functionality we want to execute when a scroll event occurs. We use debounce to create a new debounced version of the handleScroll function called debouncedScroll with a debounce threshold of 200 milliseconds.
+
+We attach the debouncedScroll function as the event handler for the scroll event on the window object. The debouncedScroll function will be invoked only once after the user has stopped scrolling for 200 milliseconds.
+
+## Throttling
+
+Throttling is a technique that limits the frequency of function execution by enforcing a maximum number of calls within a given time interval. It ensures that the function is invoked at regular intervals and prevents it from being called too frequently.
+
+The key steps for implementing throttling are as follows:
+
+1. Define a time interval, often referred to as the throttle interval.
+2. Set up an event handler that triggers the function on the desired event.
+3. Implement a mechanism to enforce the throttle interval using setTimeout.
+4. Track the last execution time of the function.
+5. Invoke the function only if the throttle interval has passed since the last execution.
+
+Example
+
+```javascript
+function throttle(func, interval) {
+  let lastExecutionTime = 0;
+
+  return function (...args) {
+    const now = Date.now();
+
+    if (now - lastExecutionTime >= interval) {
+      func.apply(this, args);
+      lastExecutionTime = now;
+    }
+  };
+}
+
+function handleResize() {
+  console.log("Handling resize event...");
+  // Perform resize-related tasks here
+}
+
+const throttledResize = throttle(handleResize, 200);
+
+window.addEventListener("resize", throttledResize);
+```
+
+In the example above, we define a throttle function that takes a func (the function to throttle) and an interval (the throttle interval) as parameters. The throttle function returns a new function that wraps the original function and adds the throttling behavior.
+
+We define a handleResize function that represents the actual functionality we want to execute when a resize event occurs. We use throttle to create a new throttled version of the handleResize function called throttledResize with a throttle interval of 200 milliseconds.
+
+We attach the throttledResize function as the event handler for the resize event on the window object. The throttledResize function will be invoked at most once every 200 milliseconds, ensuring that the handleResize function is not called too frequently during rapid window resizing.
 
 ## Benefits
 
-- Simplified Event Handling: Event delegation allows you to handle events efficiently, especially when dealing with many elements or dynamically created elements.
-- Memory Efficiency: With event delegation, you attach fewer event listeners, which reduces memory consumption and improves performance.
-- Dynamic Event Handling: Event delegation enables handling events on elements that are added or removed dynamically without requiring additional event listeners.
+- Improved Performance: Debouncing and throttling help optimize performance by reducing the frequency of function execution, especially for resource-intensive tasks or events triggered in quick succession.
+- Preventing Unnecessary Operations: These techniques prevent unnecessary function calls, allowing you to focus on executing the function only when it's needed or when a certain period of inactivity has passed.
+- Enhancing User Experience: By controlling the rate of function execution, debouncing and throttling can improve the responsiveness and smoothness of UI interactions, such as scrolling, resizing, or typing.
