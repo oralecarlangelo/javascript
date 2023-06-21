@@ -1,53 +1,55 @@
-# Event Loop
+# Event Delegation and Bubbling
 
-The Event Loop is a fundamental concept in JavaScript that handles the execution of code in a non-blocking, asynchronous manner. It is responsible for managing the order and timing of executing tasks, callbacks, and events in the JavaScript runtime environment.
+Event delegation and bubbling are concepts in JavaScript that allow you to handle events efficiently and effectively, especially when dealing with multiple elements or dynamically created elements.
 
-## Execution Model
+## Event Delegation
 
-JavaScript is a single-threaded language, meaning it can only execute one piece of code at a time. However, JavaScript also has a concurrency model based on an event-driven, non-blocking architecture. This is made possible by the Event Loop.
+Event delegation is a technique where you attach an event listener to a parent element instead of individual child elements. The parent element listens for events that bubble up from its child elements. This approach is useful when you have a large number of child elements or dynamically created elements.
 
-The Event Loop constantly checks for any pending tasks in different queues and executes them in a specific order:
+The key steps for event delegation are as follows:
 
-1. `Call Stack`: It maintains the execution context of the currently running code. When a function is invoked, a new frame is added to the top of the call stack, and when a function returns, its frame is removed.
-
-2. `Task Queue` (also known as the "Callback Queue"): It holds tasks that are scheduled to be executed in the future. For example, when a setTimeout callback expires, it gets added to the task queue.
-
-3. `Microtask Queue`: It holds microtasks, which are tasks with higher priority than regular tasks. Microtasks include Promises and certain APIs like process.nextTick and queueMicrotask. Microtasks are always executed before regular tasks.
-
-4. `Render Queue` (only in browser environments): It holds UI rendering tasks, such as updating the DOM. This queue is executed after the microtask queue.
-
-The Event Loop continuously checks the call stack, and if it's empty, it looks for tasks in the task queue. If there are tasks, the Event Loop moves them to the call stack for execution. This process continues indefinitely, allowing JavaScript to handle asynchronous operations effectively.
-
+Identify a parent element that will contain all the child elements of interest.
+Attach an event listener to the parent element.
+Inside the event listener, determine the specific child element that triggered the event using event.target.
+Perform the desired action based on the event and the target element.
 Example
+Suppose we have an unordered list (ul) with multiple list items (li) as child elements. We want to change the background color of a list item when it is clicked. Instead of attaching an event listener to each list item, we can use event delegation by attaching the event listener to the parent unordered list.
 
 ```javascript
-console.log("Start");
+const list = document.querySelector("ul");
 
-setTimeout(() => {
-  console.log("SetTimeout");
-}, 0);
-
-Promise.resolve().then(() => {
-  console.log("Promise");
+list.addEventListener("click", (event) => {
+  if (event.target.tagName === "LI") {
+    event.target.style.backgroundColor = "yellow";
+  }
 });
-
-console.log("End");
 ```
 
-In the example above, we have a setTimeout function and a Promise that are scheduled to run asynchronously. The code outputs:
+In the example above, we attach the click event listener to the parent unordered list (list). When a list item is clicked, the event bubbles up to the parent, and we can access the specific list item using event.target. We check if the target element's tag name is 'LI' and then change its background color to yellow.
 
+By using event delegation, we only need one event listener on the parent element, regardless of the number of child elements. This reduces memory usage and simplifies event management, especially when dynamically adding or removing child elements.
+
+## Event Bubbling
+
+Event bubbling is the process where an event triggered on an element also triggers the same event on its parent elements, propagating up the DOM tree until it reaches the document object. This allows you to handle events at different levels of the DOM hierarchy.
+
+When an event occurs on an element, it triggers the event handlers for that specific element first, then the handlers for its parent elements, and so on, until it reaches the document object. This behavior is known as event bubbling.
+
+Example
+Suppose we have an HTML structure with nested elements, and we want to log a message whenever any element is clicked, including its parent elements.
+
+```javascript
+document.addEventListener("click", (event) => {
+  console.log("Clicked element:", event.target);
+});
 ```
-Start
-End
-Promise
-SetTimeout
 
-```
+In the example above, we attach a click event listener to the document object. When any element is clicked, the event bubbles up to the document, triggering the event listener. We log the clicked element (event.target) to the console.
 
-Even though the setTimeout callback has a delay of 0 milliseconds, it is still executed after the "Promise" microtask. This is because microtasks are always executed before regular tasks in the Event Loop.
+Event bubbling allows you to handle events in a more generic and flexible way. You can attach a single event listener to a common ancestor element and capture events from multiple child elements without the need for individual event listeners.
 
 ## Benefits
 
-- Asynchronous Execution: The Event Loop allows JavaScript to handle asynchronous operations efficiently without blocking the execution of other code.
-- Responsive User Interface: By utilizing the Event Loop, JavaScript can handle user interactions, network requests, and other time-consuming tasks while keeping the user interface responsive.
-- Non-Blocking Architecture: JavaScript's event-driven, non-blocking architecture enables concurrency and makes it suitable for building scalable, performant applications.
+- Simplified Event Handling: Event delegation allows you to handle events efficiently, especially when dealing with many elements or dynamically created elements.
+- Memory Efficiency: With event delegation, you attach fewer event listeners, which reduces memory consumption and improves performance.
+- Dynamic Event Handling: Event delegation enables handling events on elements that are added or removed dynamically without requiring additional event listeners.
