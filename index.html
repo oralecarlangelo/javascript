@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Event Delegation and Bubbling Example</title>
-    <style>
-      ul {
-        list-style-type: none;
-        padding: 0;
-      }
-      li {
-        margin-bottom: 5px;
-        padding: 10px;
-        background-color: lightblue;
-      }
-    </style>
-  </head>
-  <body>
-    <ul id="myList">
-      <li>Item 1</li>
-      <li>Item 2</li>
-      <li>Item 3</li>
-      <li>Item 4</li>
-      <li>Item 5</li>
-    </ul>
+<head>
+  <title>Debouncing and Throttling Example</title>
+</head>
+<body>
+  <h1>Debouncing and Throttling Example</h1>
 
-    <script src="index.js"></script>
-  </body>
+  <!-- Your HTML content here -->
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, fuga et iste molestias doloremque laudantium! Eius nesciunt odit, est veritatis recusandae facere quis, dignissimos necessitatibus doloribus vitae molestias modi reprehenderit!</p>
+
+  <script src="index.js"></script>
+</body>
 </html>
