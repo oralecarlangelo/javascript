@@ -1,8 +1,8 @@
-## Debouncing and Throttling
+# Debouncing and Throttling
 
 Debouncing and throttling are techniques used to control the frequency of execution of a function in response to frequent events, such as scroll events or keystrokes. These techniques help optimize performance, reduce unnecessary function calls, and improve user experience.
 
-# Debouncing
+## Debouncing
 
 Debouncing is a technique that delays the execution of a function until after a certain period of inactivity. It ensures that the function is called only once after a series of rapid-fire events, with a specified delay before invoking the function.
 
