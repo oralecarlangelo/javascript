@@ -1,50 +1,61 @@
-# Singleton Pattern
+# Factory Pattern
 
-The Singleton pattern is a design pattern in JavaScript that restricts the instantiation of a class to a single object. It ensures that only one instance of a class exists throughout the application and provides a global point of access to that instance.
+The Factory pattern is a creational design pattern in JavaScript that provides an interface for creating objects. It encapsulates the object creation process and allows the client to create objects without specifying their concrete classes. This pattern promotes loose coupling and flexibility in object creation.
 
-Usage
-To implement the Singleton pattern, follow these steps:
+## Usage
 
-1. Create a class with a private constructor and a private static variable to hold the single instance.
-2. Define a static method to access the instance, and if the instance doesn't exist, create it.
-3. Use the static method to access the single instance of the class throughout the application.
+To use the Factory pattern, follow these steps:
 
-## Example
+1. Define a factory class or a factory function that encapsulates the object creation logic.
+2. Implement different object creation methods within the factory class or function, each responsible for creating a specific type of object.
+3. Use the factory methods to create objects based on the client's requirements.
+   Example
 
 ```javascript
-class Singleton {
+// Product classes
+class ProductA {
   constructor() {
-    // Private variable
-    this.data = "Singleton instance created";
+    this.name = "Product A";
   }
+  // ...
+}
 
-  static getInstance() {
-    if (!Singleton.instance) {
-      Singleton.instance = new Singleton();
+class ProductB {
+  constructor() {
+    this.name = "Product B";
+  }
+  // ...
+}
+
+// Factory class
+class Factory {
+  createProduct(type) {
+    if (type === "A") {
+      return new ProductA();
+    } else if (type === "B") {
+      return new ProductB();
+    } else {
+      throw new Error("Invalid product type.");
     }
-    return Singleton.instance;
-  }
-
-  getData() {
-    return this.data;
   }
 }
 
-const instance1 = Singleton.getInstance();
-console.log(instance1.getData()); // Output: Singleton instance created
+// Usage
+const factory = new Factory();
 
-const instance2 = Singleton.getInstance();
-console.log(instance2.getData()); // Output: Singleton instance created
+const productA = factory.createProduct("A");
+console.log(productA.name); // Output: Product A
 
-console.log(instance1 === instance2); // Output: true (both instances are the same)
+const productB = factory.createProduct("B");
+console.log(productB.name); // Output: Product B
 ```
 
-In the example above, we create a Singleton class with a private constructor and a private static variable instance to hold the single instance of the class. The getInstance method is a static method that returns the single instance of the class. If the instance doesn't exist, it creates a new instance. The getData method returns the data of the Singleton instance.
+In the example above, we have two product classes: ProductA and ProductB. We also have a Factory class responsible for creating the products. The createProduct method in the Factory class takes a type parameter and returns a corresponding instance of the product class based on the provided type.
 
-To access the Singleton instance, we call the static method getInstance(). Both instance1 and instance2 refer to the same instance of the Singleton class, as confirmed by the comparison instance1 === instance2 which outputs true.
+To create objects, we instantiate the Factory class and use the createProduct method to create instances of the desired products. The factory handles the object creation process based on the type parameter, ensuring the appropriate product instance is created.
 
 ## Benefits
 
-- Single Instance: The Singleton pattern ensures that only one instance of a class exists throughout the application.
-- Global Access: The Singleton instance can be accessed globally, providing a centralized point of access.
-- Lazy Initialization: The Singleton instance is created when it is first accessed, allowing for lazy initialization and efficient resource usage.
+- Encapsulation: The Factory pattern encapsulates the object creation logic within a separate class or function.
+- Loose Coupling: The client code is decoupled from the concrete classes and depends only on the factory interface.
+- Flexibility: The Factory pattern allows for easy addition or modification of product types without affecting the client code.
