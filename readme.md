@@ -1,66 +1,118 @@
-# Advanced DOM Manipulation
+# Advanced Asynchronous JavaScript
 
-Manipulating the Document Object Model (DOM) is a fundamental part of web development. Advanced DOM manipulation techniques allow for the creation, removal, and traversal of elements within the HTML document.
+This section covers advanced asynchronous JavaScript techniques, including promises, async/await, and working with AJAX and APIs.
 
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Advanced DOM Manipulation</title>
-  </head>
-  <body>
-    <div id="container">
-      <div id="element-to-remove">Element to Remove</div>
-    </div>
+## Promises
 
-    <script src="index.js"></script>
-  </body>
-</html>
-```
-
-## Creating and Removing Elements
-
-Creating new elements dynamically enables the dynamic generation of content and user interfaces. Removing elements helps in managing the structure of the DOM.
+The fetchData function returns a promise that resolves after a delay of 2 seconds. The resolved value is the message "Data fetched successfully."
 
 Example:
 
 ```javascript
-// Creating a new element
-const newElement = document.createElement("div");
-newElement.textContent = "New element";
-newElement.className = "box";
-
-// Appending the new element to an existing element
-const container = document.getElementById("container");
-container.appendChild(newElement);
-
-// Removing an element
-const elementToRemove = document.getElementById("element-to-remove");
-if (elementToRemove) {
-  elementToRemove.remove();
+function fetchData() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const data = "Data fetched successfully.";
+      resolve(data);
+      // reject(new Error("Failed to fetch data."));
+    }, 2000);
+  });
 }
+
+fetchData()
+  .then((data) => {
+    console.log(data); // Output: Data fetched successfully.
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 ```
 
-In the above example, a new div element is created and customized with text content and a CSS class. The new element is then appended to an existing element using appendChild(). Additionally, an element with a specific ID is removed from the DOM using the remove() method. A check is performed to ensure the element exists before attempting to remove it.
+The above example demonstrates how to use promises to handle asynchronous operations. The then method is used to handle the resolved value, while the catch method is used to handle any errors that occur during the promise execution.
 
-## Traversing the DOM
+## Async/Await
 
-Traversing the DOM allows for navigation between different elements, such as accessing parent, sibling, and child elements.
+The fetchDataAsync function uses async/await syntax to handle asynchronous operations. It awaits the resolution of the fetchData promise and logs the resolved value to the console.
 
 Example:
 
 ```javascript
-// Accessing parent element
-const parentElement = container.parentNode;
+async function fetchDataAsync() {
+  try {
+    const data = await fetchData();
+    console.log(data); // Output: Data fetched successfully.
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-// Accessing sibling elements
-const previousSibling = container.previousElementSibling;
-const nextSibling = container.nextElementSibling;
-
-// Accessing child elements
-const children = container.children;
-const firstChild = container.firstElementChild;
-const lastChild = container.lastElementChild;
+fetchDataAsync();
 ```
 
-In the above example, different methods are used to traverse the DOM. The parentNode property provides access to the parent element, while previousElementSibling and nextElementSibling allow navigation to sibling elements. The children, firstElementChild, and lastElementChild properties enable access to child elements of a specific element.
+The above example demonstrates how to use async/await to write asynchronous code in a more synchronous-like manner. The await keyword is used to pause the execution until the promise is resolved or rejected. The code within the try block is executed when the promise is resolved, and any errors are caught and handled in the catch block.
+
+## AJAX with XMLHttpRequest
+
+The fetchUserWithXHR function demonstrates how to make an AJAX request using the XMLHttpRequest object. It makes a GET request to the GitHub API to fetch user data based on the provided username.
+
+Example:
+
+```javascript
+function fetchUserWithXHR(username) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `https://api.github.com/users/${username}`);
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        const data = JSON.parse(xhr.responseText);
+        resolve(data);
+      } else {
+        reject(new Error("Failed to fetch user data."));
+      }
+    };
+    xhr.onerror = function () {
+      reject(new Error("Failed to make a request."));
+    };
+    xhr.send();
+  });
+}
+
+fetchUserWithXHR("oralecarlangelo")
+  .then((user) => {
+    console.log(user); // Output: User data
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+```
+
+The above example demonstrates how to make an AJAX request using the XMLHttpRequest object. It creates a new XMLHttpRequest, sets the request method and URL, and defines event handlers for the successful response and error cases. The resolved data is logged to the console, and any errors are caught and handled in the catch block.
+
+## Working with Axios
+
+The fetchUserWithAxios function demonstrates how to make an AJAX request using the Axios library. It makes a GET request to the GitHub API to fetch user data based on the provided username.
+
+Example:
+
+```javascript
+function fetchUserWithAxios(username) {
+  return axios
+    .get(`https://api.github.com/users/${username}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw new Error("Failed to fetch user data.");
+    });
+}
+
+fetchUserWithAxios("oralecarlangelo")
+  .then((user) => {
+    console.log(user); // Output: User data
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+```
+
+The above example demonstrates how to make an AJAX request using the Axios library. The get method is used to make a GET request to the specified URL, and the response data is accessed through the data property of the response object. Any errors are caught and handled in the catch block.
